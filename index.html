@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Book Goblin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #050505;
+    --glass: rgba(255,255,255,0.08);
+    --neon: #22ff00;
+    --purple: #9b4dff;
+    --text: #f5f5f5;
+    --grad-primary: linear-gradient(135deg, #6b3fb3 0%, #4a2577 100%);
+    --grad-accent: linear-gradient(135deg, #5a3ea8 0%, #3d1f5c 100%);
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    background: radial-gradient(circle at top, #1a0d2e 0%, #050505 50%, #0a0515 100%);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+}
+
+
+.site {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(12px);
+    will-change: opacity, transform;
+    transition: opacity .6s cubic-bezier(.2,.9,.2,1), transform .6s cubic-bezier(.2,.9,.2,1);
+}
+.fade-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hover-lift {
+    transition: transform .22s ease, box-shadow .22s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-6px);
+}
+
+/* Accessible focus */
+:where(button, a):focus-visible {
+    outline: 3px solid rgba(155,77,255,0.18);
+    outline-offset: 3px;
+    border-radius: 10px;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 48px;
+}
+
+.header h1 {
+    font-family: "Literata", serif;
+    font-size: 46px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header p {
+    margin-top: 6px;
+    color: #bbb;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+.header-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    padding: 8px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.45);
+}
+
+.header-img img {
+    display: block;
+    height: 56px;
+    width: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    filter: saturate(0.98) contrast(0.98);
+}
+
+@media (max-width: 700px) {
+    .header {
+        padding: 20px 20px;
+    }
+    .header-img img {
+        height: 44px;
+    }
+}
+
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--glass);
+    backdrop-filter: blur(14px);
+    padding: 10px 16px;
+    border-radius: 18px;
+}
+
+.user-menu img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--neon);
+}
+
+.user-menu button {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #f5f5f5;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.user-menu button:hover {
+    background: #ff3b3b;
+    border-color: #ff3b3b;
+    color: white;
+}
+
+
+.main {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 40px;
+    padding: 20px 48px;
+    align-items: center;
+}
+
+
+.nav {
+    background: var(--glass);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 18px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nav .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--grad-primary);
+    border: none;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    box-shadow: 0 8px 20px rgba(107, 63, 179, 0.3);
+}
+
+.nav .btn.secondary {
+    background: linear-gradient(135deg, rgba(107,63,179,0.15), rgba(90,62,168,0.08));
+    color: var(--text);
+    border: 1px solid rgba(107,63,179,0.3);
+    box-shadow: none;
+}
+
+.nav .btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    opacity: 0.98;
+}
+
+.nav .icon {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+@media (max-width: 700px) {
+    .nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .nav .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero img {
+    max-height: 420px;
+    filter: drop-shadow(0 25px 40px rgba(0,0,0,.7));
+}
+
+
+.snapshot {
+    margin: 40px 48px;
+    padding: 28px;
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    border-radius: 28px;
+}
+
+.snapshot-header {
+    font-family: "Literata", serif;
+    display: inline-block;
+    padding: 10px 22px;
+    background: var(--grad-primary);
+    color: white;
+    border-radius: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 22px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.stat {
+    background: rgba(0,0,0,.4);
+    padding: 20px;
+    border-radius: 18px;
+}
+
+.stat h3 {
+    font-size: 34px;
+    font-weight: 700;
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #aaa;
+}
+
+
+footer {
+    padding: 24px;
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    font-weight: 500;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div>
+        <b><h1>Book Goblin</h1></b>
+        <i><p>Your Personal Library Assistant</p></i>
+    </div>
+        <div class="user-menu">
+        <img src="avatar.png" alt="User Avatar">
+        <button>Sign Out</button>
+    </div>
+</header>
+
+<section class="main">
+
+    <nav class="nav">
+        <button class="btn hover-lift" aria-label="Get Started">
+            <span class="icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 21s4-4 9-4 9 4 9 4" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 2v9" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 4l-4-2-4 2" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span>Get Started</span>
+        </button>
+
+        <button class="btn secondary hover-lift" aria-label="My Books">
+            <span class="icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 6h14v12H3z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+                    <path d="M7 6v12" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+                </svg>
+            </span>
+            <span>My Books</span>
+        </button>
+
+        <button class="btn secondary hover-lift" aria-label="Discover">
+            <span class="icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2l2.09 6.26L20 11l-5 3.64L15.18 21 12 17.77 8.82 21 9 14.64 4 11l5.91-2.74L12 2z" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span>Discover</span>
+        </button>
+    </nav>
+
+    <div class="hero">
+        <img src="bookgoblin_3.0.png" alt="Book Goblin">
+    </div>
+
+</section>
+
+<section class="snapshot fade-up" data-animate>
+    <div class="snapshot-header">Your Reading Snapshot</div>
+
+    <div class="stats">
+        <div class="stat">
+            <h3>37</h3>
+            <span>Books Read</span>
+        </div>
+        <div class="stat">
+            <h3>50</h3>
+            <span>TBR</span>
+        </div>
+        <div class="stat">
+            <h3>400</h3>
+            <span>Recommended</span>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<footer>
+    &copy; U197 Designs 2025
+</footer>
+
+<script>
+(function(){
+  const els = document.querySelectorAll('[data-animate]');
+  if(!els.length) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.08});
+  els.forEach(el => io.observe(el));
+})();
+</script>
+
+</body>
+</html>
