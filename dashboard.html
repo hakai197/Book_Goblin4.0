@@ -66,7 +66,7 @@
 <section class="main">
 
     <nav class="nav">
-        <button class="btn secondary hover-lift" aria-label="Get Started">
+        <button class="btn hover-lift" aria-label="Get Started">
             <span class="icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2 21s4-4 9-4 9 4 9 4" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -95,6 +95,35 @@
             </span>
             <span>Discover</span>
         </button>
+
+     
+
+        <a href="https://www.hpb.com/" class="btn secondary hover-lift" aria-label="Collect More Books">
+            <span class="icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span>Buy More Books!!!</span>
+        </a>
+
+        <div class="dropdown">
+            <button class="btn secondary dropdown-toggle hover-lift" aria-label="Menu">
+                <span class="icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span>Menu</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#settings">Settings</a></li>
+                <li><a href="#wishlist">Wishlist</a></li>
+                <li><a href="#reading-goals">Reading Goals</a></li>
+                <li><a href="#favorites">Favorites</a></li>
+                <li><a href="#help">Help & Support</a></li>
+            </ul>
+        </div>
     </nav>
 
     <div class="hero">
@@ -145,6 +174,39 @@
     });
   }, {threshold: 0.08});
   els.forEach(el => io.observe(el));
+})();
+
+
+(function(){
+  const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+  
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const dropdown = this.closest('.dropdown');
+      const isActive = dropdown.classList.contains('active');
+      
+      // Close all dropdowns
+      document.querySelectorAll('.dropdown').forEach(d => {
+        d.classList.remove('active');
+      });
+      
+      // Toggle current dropdown
+      if (!isActive) {
+        dropdown.classList.add('active');
+      }
+    });
+  });
+  
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.classList.remove('active');
+      });
+    }
+  });
 })();
 
 // Page transition for navigation links
