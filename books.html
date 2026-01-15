@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Books - Book Goblin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel='stylesheet' href='styles.css'>
+
+<style>
+/* Books Page Specific Styles */
+.books-container {
+    padding: 40px 48px;
+}
+
+.books-header {
+    margin-bottom: 40px;
+}
+
+.books-header h2 {
+    font-family: "Literata", serif;
+    font-size: 36px;
+    font-weight: 700;
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.books-filters {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.books-hero-image {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+   
+    
+    
+}
+
+.books-hero-image img {
+    width: 100%;
+    height: 100%;
+  
+}
+
+.filter-btn {
+    padding: 10px 18px;
+    background: rgba(107, 63, 179, 0.15);
+    border: 1px solid rgba(107, 63, 179, 0.3);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--grad-primary);
+    border-color: rgba(155, 77, 255, 0.6);
+    box-shadow: 0 0 12px rgba(155, 77, 255, 0.3);
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.book-card {
+    background: var(--glass);
+    backdrop-filter: blur(14px);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(107, 63, 179, 0.25);
+    border-color: rgba(155, 77, 255, 0.4);
+}
+
+.book-cover {
+    width: 100%;
+    aspect-ratio: 2/3;
+    background: linear-gradient(135deg, rgba(107, 63, 179, 0.2), rgba(90, 62, 168, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: #666;
+    overflow: hidden;
+}
+
+.book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-info {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-title {
+    font-family: "Literata", serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.book-author {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.book-rating {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.star {
+    color: #ffc107;
+    font-size: 12px;
+}
+
+.book-status {
+    font-size: 12px;
+    padding: 6px 10px;
+    background: rgba(107, 63, 179, 0.2);
+    border-radius: 8px;
+    color: #9b4dff;
+    text-align: center;
+    margin-top: auto;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 40px;
+    color: #888;
+}
+
+.empty-state h3 {
+    font-family: "Literata", serif;
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: #aaa;
+}
+
+@media (max-width: 700px) {
+    .books-container {
+        padding: 20px;
+    }
+
+    .books-header h2 {
+        font-size: 28px;
+    }
+
+    .books-hero-image {
+        min-height: 200px;
+        font-size: 60px;
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 16px;
+    }
+
+    .books-filters {
+        margin-bottom: 0;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+    <div>
+        <b><h1>Book Goblin</h1></b>
+        <i><p>Your Personal Library Assistant</p></i>
+    </div>
+    <div class="user-menu">
+        <img src="Img\avatar.png" alt="User Avatar">
+        <button>Sign Out</button>
+    </div>
+</header>
+
+<section class="main">
+    <nav class="nav">
+        <button class="btn hover-lift" aria-label="Dashboard">
+            <span class="icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 21s4-4 9-4 9 4 9 4" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 2v9" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 4l-4-2-4 2" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span>Dashboard</span>
+        </button>
+
+        <button class="btn secondary hover-lift" aria-label="My Books">
+            <span class="icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 6h14v12H3z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+                    <path d="M7 6v12" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+                </svg>
+            </span>
+            <span>My Books</span>
+        </button>
+
+        <button class="btn secondary hover-lift" aria-label="Discover">
+            <span class="icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2l2.09 6.26L20 11l-5 3.64L15.18 21 12 17.77 8.82 21 9 14.64 4 11l5.91-2.74L12 2z" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span>Discover</span>
+        </button>
+    </nav>
+    
+    <div class="books-hero-image">
+        <img src="Img\Chillin Goblin 2.0.png" alt="Chillin Goblin">
+    </div>
+</section>
+
+<section class="books-container">
+    <div class="books-header">
+        <h2>My Books</h2>
+        
+        <div class="books-filters">
+            <button class="filter-btn active">All Books</button>
+            <button class="filter-btn">Reading</button>
+            <button class="filter-btn">Completed</button>
+            <button class="filter-btn">TBR</button>
+            <button class="filter-btn">Favorites</button>
+        </div>
+    </div>
+
+    <div class="books-grid">
+        <!-- Sample Book Card -->
+        <div class="book-card fade-up" data-animate>
+            <div class="book-cover">📚</div>
+            <div class="book-info">
+                <h3 class="book-title">The Midnight Library</h3>
+                <p class="book-author">Matt Haig</p>
+                <div class="book-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+                <div class="book-status">Completed</div>
+            </div>
+        </div>
+
+        <!-- Sample Book Card -->
+        <div class="book-card fade-up" data-animate>
+            <div class="book-cover">📖</div>
+            <div class="book-info">
+                <h3 class="book-title">Atomic Habits</h3>
+                <p class="book-author">James Clear</p>
+                <div class="book-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">☆</span>
+                </div>
+                <div class="book-status">Reading</div>
+            </div>
+        </div>
+
+        <!-- Sample Book Card -->
+        <div class="book-card fade-up" data-animate>
+            <div class="book-cover">📕</div>
+            <div class="book-info">
+                <h3 class="book-title">Project Hail Mary</h3>
+                <p class="book-author">Andy Weir</p>
+                <div class="book-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">☆</span>
+                    <span class="star">☆</span>
+                </div>
+                <div class="book-status">TBR</div>
+            </div>
+        </div>
+
+        <!-- Sample Book Card -->
+        <div class="book-card fade-up" data-animate>
+            <div class="book-cover">📗</div>
+            <div class="book-info">
+                <h3 class="book-title">Educated</h3>
+                <p class="book-author">Tara Westover</p>
+                <div class="book-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+                <div class="book-status">Completed</div>
+            </div>
+        </div>
+
+        <!-- Sample Book Card -->
+        <div class="book-card fade-up" data-animate>
+            <div class="book-cover">📙</div>
+            <div class="book-info">
+                <h3 class="book-title">The Silent Patient</h3>
+                <p class="book-author">Alex Michaelides</p>
+                <div class="book-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">☆</span>
+                </div>
+                <div class="book-status">Reading</div>
+            </div>
+        </div>
+
+        <!-- Sample Book Card -->
+        <div class="book-card fade-up" data-animate>
+            <div class="book-cover">📔</div>
+            <div class="book-info">
+                <h3 class="book-title">Dune</h3>
+                <p class="book-author">Frank Herbert</p>
+                <div class="book-rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+                <div class="book-status">TBR</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    &copy; U197 Designs 2025
+</footer>
+
+<script>
+(function(){
+  const els = document.querySelectorAll('[data-animate]');
+  if(!els.length) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.08});
+  els.forEach(el => io.observe(el));
+})();
+
+// Filter buttons functionality
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
