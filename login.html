@@ -11,6 +11,193 @@
 <link rel ='stylesheet' href='styles.css'>
 
 </head>
+<style>
+    /* Links */
+.login-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+.login-links a {
+    color: #9b4dff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.login-links a:hover {
+    color: #b57cff;
+    text-decoration: underline;
+}
+
+/* Image Side */
+.login-image-container {
+    flex: 1;
+    background: linear-gradient(135deg, rgba(107, 63, 179, 0.1), rgba(90, 62, 168, 0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+/* Login Container */
+.login-container {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Login Form Side */
+.login-form-container {
+    flex: 1;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.login-header h1 {
+    font-family: "Literata", serif;
+    font-size: 46px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.login-header p {
+    color: #bbb;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #ddd;
+}
+
+.form-control {
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--input-bg);
+    border: 1px solid rgba(107, 63, 179, 0.3);
+    border-radius: 14px;
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    transition: all 0.25s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: rgba(155, 77, 255, 0.6);
+    box-shadow: 0 0 0 3px rgba(155, 77, 255, 0.2);
+}
+
+.form-control::placeholder {
+    color: #888;
+}
+
+/* Login Button */
+.login-btn {
+    width: 100%;
+    padding: 18px;
+    background: var(--grad-primary);
+    border: none;
+    border-radius: 14px;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 8px 20px rgba(107, 63, 179, 0.3);
+}
+
+.login-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(107, 63, 179, 0.4);
+}
+
+.login-btn:active {
+    transform: translateY(-1px);
+}
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+    color: #888;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.divider span {
+    padding: 0 15px;
+    font-size: 14px;
+}
+
+/* Social Login */
+.social-login {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.social-btn {
+    flex: 1;
+    padding: 14px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.social-btn:hover {
+    background: rgba(107, 63, 179, 0.1);
+    border-color: rgba(107, 63, 179, 0.5);
+}
+
+
+</style>
 
 <body>
     <div class="login-container">

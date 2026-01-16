@@ -42,14 +42,22 @@
     display: flex;
     gap: 32px;
     align-items: flex-start;
-    margin-bottom: 40px;
+    padding: 40px 48px;
+    position: relative; 
+    min-height: 400px;
+    margin-top: -100px;
 }
 
 .books-hero-image {
-    display: flex;
-    width: 300px;
-    height: 400px;
-    flex-shrink: 0;
+    width:100%;
+    border-radius: 16px;
+    position: relative;
+    left: -120px;
+    margin-right: -120px;
+    box-shadow: 20px 20px 40px rgba(0,0,0,0.3);
+    overflow: hidden; 
+    margin-top: -400px;
+    z-index: 1;;
 }
 
 .books-hero-image img {
@@ -58,14 +66,18 @@
 }
 
 .stats-window {
-    background: var(--glass);
-    backdrop-filter: blur(14px);
+    background: var(--solid-glass);
+    backdrop-filter: blur(100px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
-    padding: 32px 24px;
+    padding: 20px 24px;
     flex: 1;
     min-width: 200px;
     max-width: 400px;
+    z-index: 100;
+    position: relative;
+    margin-top: 200px;
+    margin-left: -1000px;
 }
 
 .stats-window h3 {
@@ -233,38 +245,7 @@
     color: #aaa;
 }
 
-@media (max-width: 700px) {
-    .books-container {
-        padding: 20px;
-    }
 
-    .books-header h2 {
-        font-size: 28px;
-    }
-
-    .hero-section {
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    .books-hero-image {
-        min-height: 200px;
-        font-size: 60px;
-    }
-
-    .stats-window {
-        max-width: 100%;
-    }
-
-    .books-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 16px;
-    }
-
-    .books-filters {
-        margin-bottom: 0;
-    }
-}
 
 .page-transition {
     position: fixed;
@@ -312,6 +293,7 @@
         <i><p>Your Personal Library Assistant</p></i>
     </div>
     <div class="user-menu">
+        <p>User Name</p>
         <img src="Img\avatar.png" alt="User Avatar">
         <button>Sign Out</button>
     </div>
@@ -327,7 +309,7 @@
                     <path d="M16 4l-4-2-4 2" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </span>
-            <span>Dashboard</span>
+            <span>Home</span>
         </a>
 
         <button class="btn secondary hover-lift" aria-label="My Books">
@@ -340,19 +322,38 @@
             <span>My Books</span>
         </button>
 
-        <button class="btn secondary hover-lift" aria-label="Discover">
+       <a href="discover.html" class="btn secondary hover-lift nav-link" aria-label="Discover">
             <span class="icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2l2.09 6.26L20 11l-5 3.64L15.18 21 12 17.77 8.82 21 9 14.64 4 11l5.91-2.74L12 2z" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </span>
             <span>Discover</span>
-        </button>
+        </a>
+        <div class="dropdown">
+            <button class="btn secondary dropdown-toggle hover-lift" aria-label="Menu">
+                <span class="icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span>Menu</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#settings">Settings</a></li>
+                <li><a href="#wishlist">Wishlist</a></li>
+                <li><a href="#reading-goals">Reading Goals</a></li>
+                <li><a href="#favorites">Favorites</a></li>
+                <li><a href="#help">Help & Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
     </nav>
     
     <div class="hero-section">
         <div class="books-hero-image">
-            <img src="Img\Chillin Goblin 2.0.png" alt="Chillin Goblin">
+            <img src="Img\Chilling Goblin 3.0.png" alt="Chillin Goblin">
         </div>
         <div class="stats-window">
             <h3>Reading Stats</h3>
@@ -369,11 +370,10 @@
                 <span class="stat-value">2,000 pages</span>
             </div>
         </div>
-        <div class="books-hero-image">
-            <img src="Img\Library.png" alt="Library">
-        </div>
+        
     </div>
 </section>
+
 
 <section class="books-container">
     <div class="books-header">
@@ -453,6 +453,38 @@
     });
   }, {threshold: 0.08});
   els.forEach(el => io.observe(el));
+})();
+
+(function(){
+  const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+  
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const dropdown = this.closest('.dropdown');
+      const isActive = dropdown.classList.contains('active');
+      
+      // Close all dropdowns
+      document.querySelectorAll('.dropdown').forEach(d => {
+        d.classList.remove('active');
+      });
+      
+      // Toggle current dropdown
+      if (!isActive) {
+        dropdown.classList.add('active');
+      }
+    });
+  });
+  
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.classList.remove('active');
+      });
+    }
+  });
 })();
 
 // Filter buttons functionality
