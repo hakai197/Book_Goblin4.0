@@ -212,7 +212,7 @@ body:has(.login-container) {
 
 .hero {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
 }
 
@@ -221,55 +221,6 @@ body:has(.login-container) {
     filter: drop-shadow(0 25px 40px rgba(0,0,0,.7));
 }
 
-
-.snapshot {
-    margin: 40px 48px;
-    padding: 28px;
-    background: var(--glass);
-    backdrop-filter: blur(16px);
-    border-radius: 28px;
-    z-index: 1;
-}
-
-.snapshot-header {
-    font-family: "Literata", serif;
-    display: inline-block;
-    padding: 10px 22px;
-    background: var(--grad-primary);
-    color: white;
-    border-radius: 14px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    margin-bottom: 22px;
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    text-align: center;
-}
-
-.stat {
-    background: rgba(0,0,0,.4);
-    padding: 20px;
-    border-radius: 18px;
-}
-
-.stat h3 {
-    font-size: 34px;
-    font-weight: 700;
-    background: var(--grad-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.stat span {
-    font-size: 14px;
-    font-weight: 500;
-    color: #aaa;
-}
 
 
 footer {
