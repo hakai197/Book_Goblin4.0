@@ -12,97 +12,430 @@
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel='stylesheet' href='styles.css'>
+<style>
+    /* Additional styles for the homepage hero */
+    .home-page .hero-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        padding-top: 0;
+    }
+    
+    .home-page .hero-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('Img/BookGoblinMess.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0.1;
+        z-index: 1;
+    }
+    
+    .home-page .hero-content-container {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    
+    .home-page .hero-logo {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .home-page .hero-logo h1 {
+        font-size: 4rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+    }
+    
+    .home-page .hero-logo p {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+    }
+    
+    .home-page .hero-tagline {
+        text-align: center;
+        font-size: 1.25rem;
+        line-height: 1.6;
+        color: var(--text-secondary);
+        max-width: 800px;
+        margin: 0 auto 3rem;
+        padding: 0 1rem;
+    }
+    
+    .home-page .hero-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+        flex-wrap: wrap;
+    }
+    
+    .home-page .hero-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    
+    .home-page .hero-btn.primary {
+        background: var(--primary);
+        color: white;
+    }
+    
+    .home-page .hero-btn.primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+    }
+    
+    .home-page .hero-btn.secondary {
+        background: transparent;
+        color: var(--text-primary);
+        border-color: var(--border);
+    }
+    
+    .home-page .hero-btn.secondary:hover {
+        background: var(--hover);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .home-page .hero-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .home-page .feature {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .home-page .feature:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary);
+    }
+    
+    .home-page .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .home-page .feature h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+        color: var(--text-primary);
+    }
+    
+    .home-page .feature p {
+        color: var(--text-secondary);
+        line-height: 1.5;
+        font-size: 0.95rem;
+    }
+    
+    .home-page .home-footer {
+        background: var(--sidebar-bg);
+        border-top: 1px solid var(--border);
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+    
+    .home-page .home-footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .home-page .home-footer-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .home-page .home-footer-links a:hover {
+        color: var(--primary);
+    }
+    
+    .home-page .home-footer p {
+        color: var(--text-tertiary);
+        font-size: 0.9rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .home-page .hero-logo h1 {
+            font-size: 3rem;
+        }
+        
+        .home-page .hero-logo p {
+            font-size: 1.25rem;
+        }
+        
+        .home-page .hero-tagline {
+            font-size: 1.1rem;
+        }
+        
+        .home-page .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .home-page .hero-btn {
+            width: 100%;
+            max-width: 300px;
+            justify-content: center;
+        }
+        
+        .home-page .hero-features {
+            grid-template-columns: 1fr;
+        }
+        
+        .home-page .home-footer-links {
+            gap: 1rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .home-page .hero-logo h1 {
+            font-size: 2.5rem;
+        }
+        
+        .home-page .hero-content-container {
+            padding: 1rem;
+        }
+        
+        .home-page .home-footer-links {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+</style>
 </head>
 
 <body class="home-page">
 
-<div class="home-hero">
-    <div class="hero-background"></div>
-    
-    <!-- Floating Books Animation -->
-    <div class="floating-books">
-        <div class="floating-book"></div>
-        <div class="floating-book"></div>
-        <div class="floating-book"></div>
-        <div class="floating-book"></div>
-        <div class="floating-book"></div>
+<header class="header">
+    <div>
+        <h1>Book Goblin</h1>
+        <p>Your Personal Library Assistant</p>
     </div>
-    
-    <div class="hero-content">
-        <!-- Logo & Tagline -->
-        <div class="hero-logo">
-            <h1>Book Goblin</h1>
-            <p>Your Personal Library Assistant</p>
+</header>
+
+<!-- Main Layout with Nav on Far Left -->
+<div class="container-fluid main-layout">
+    <div class="row">
+        <!-- Left Navigation Sidebar - Fixed to far left -->
+        <div class="col-auto nav-sidebar-column">
+            <div class="nav-sidebar">
+                <div class="nav-container">
+                    <a href="index.html" class="nav-btn" aria-label="Home">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Home</span>
+                    </a>
+
+                    <a href="login.html" class="nav-btn secondary" aria-label="Login">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Login</span>
+                    </a>
+
+                    <a href="register.html" class="nav-btn secondary" aria-label="Register">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="8.5" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20 8v6M23 11h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Register</span>
+                    </a>
+
+                    <a href="about.html" class="nav-btn secondary" aria-label="About">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 16v-4M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>About</span>
+                    </a>
+
+                    <a href="features.html" class="nav-btn secondary" aria-label="Features">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org2000/svg">
+                            <path d="M12 2l2.09 6.26L20 11l-5 3.64L15.18 21 12 17.77 8.82 21 9 14.64 4 11l5.91-2.74L12 2z" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Features</span>
+                    </a>
+                </div>
+            </div>
         </div>
         
-        <!-- Tagline -->
-        <div class="hero-tagline">
-            Track, discover, and organize your reading journey with our intelligent book companion.
-            Never lose track of what you've read or what you want to read next.
-        </div>
-        
-        <!-- Action Buttons -->
-        <div class="hero-buttons">
-            <a href="login.html" class="hero-btn primary">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span>Login</span>
-            </a>
-            
-            <a href="register.html" class="hero-btn secondary">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="8.5" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20 8v6M23 11h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span>Register</span>
-            </a>
-        </div>
-        
-        <!-- Features Grid -->
-        <div class="hero-features">
-            <div class="feature">
-                <div class="feature-icon">📚</div>
-                <h3>Track Your Books</h3>
-                <p>Keep track of books you've read, are reading, or want to read. Organize your personal library with ease.</p>
-            </div>
-            
-            <div class="feature">
-                <div class="feature-icon">✨</div>
-                <h3>Smart Recommendations</h3>
-                <p>Get personalized book recommendations based on your reading history and genre preferences.</p>
-            </div>
-            
-            <div class="feature">
-                <div class="feature-icon">🎯</div>
-                <h3>Reading Goals</h3>
-                <p>Set and track your reading goals. Challenge yourself and celebrate your reading achievements.</p>
-            </div>
-            
-            <div class="feature">
-                <div class="feature-icon">📊</div>
-                <h3>Reading Stats</h3>
-                <p>Visualize your reading habits with detailed statistics and insights about your reading journey.</p>
+        <!-- Main Content Area -->
+        <div class="col main-content-column">
+            <div class="content-area">
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <div class="hero-background"></div>
+                    
+                    <div class="hero-content-container">
+                        <!-- Logo & Tagline -->
+                        <div class="hero-logo">
+                            <h1>Book Goblin</h1>
+                            <p>Your Personal Library Assistant</p>
+                        </div>
+                        
+                        <!-- Tagline -->
+                        <div class="hero-tagline">
+                            Track, discover, and organize your reading journey with our intelligent book companion.
+                            Never lose track of what you've read or what you want to read next.
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="hero-buttons">
+                            <a href="login.html" class="hero-btn primary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Login</span>
+                            </a>
+                            
+                            <a href="register.html" class="hero-btn secondary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="8.5" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M20 8v6M23 11h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Register</span>
+                            </a>
+                        </div>
+                        
+                        <!-- Features Grid -->
+                        <div class="hero-features">
+                            <div class="feature">
+                                <div class="feature-icon">📚</div>
+                                <h3>Track Your Books</h3>
+                                <p>Keep track of books you've read, are reading, or want to read. Organize your personal library with ease.</p>
+                            </div>
+                            
+                            <div class="feature">
+                                <div class="feature-icon">✨</div>
+                                <h3>Smart Recommendations</h3>
+                                <p>Get personalized book recommendations based on your reading history and genre preferences.</p>
+                            </div>
+                            
+                            <div class="feature">
+                                <div class="feature-icon">🎯</div>
+                                <h3>Reading Goals</h3>
+                                <p>Set and track your reading goals. Challenge yourself and celebrate your reading achievements.</p>
+                            </div>
+                            
+                            <div class="feature">
+                                <div class="feature-icon">📊</div>
+                                <h3>Reading Stats</h3>
+                                <p>Visualize your reading habits with detailed statistics and insights about your reading journey.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Page Transition Overlay (if using) -->
+<div class="page-transition" id="pageTransition">
+    <img src="Img/page_turning.gif" alt="Page Turning Transition">
+</div>
+
 <footer class="home-footer">
     <div class="home-footer-links">
-        <a href="#about">About Us</a>
-        <a href="#features">Features</a>
-        <a href="#contact">Contact</a>
-        <a href="#privacy">Privacy Policy</a>
-        <a href="#terms">Terms of Service</a>
+        <a href="about.html">About Us</a>
+        <a href="features.html">Features</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
     </div>
     <p>&copy; U197 Designs 2025. Book Goblin - Your Personal Library Assistant</p>
 </footer>
 
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Page Transition Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const transition = document.getElementById('pageTransition');
+        
+        // Hide transition on page load
+        setTimeout(() => {
+            if (transition) transition.classList.remove('active');
+        }, 100);
+        
+        // Add click listeners to navigation links if transition exists
+        if (transition) {
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Skip dropdowns and special links
+                    if (this.classList.contains('dropdown-toggle') || 
+                        this.classList.contains('nav-btn') && this.getAttribute('href') === '#') {
+                        return;
+                    }
+                    
+                    // Apply transition to internal links
+                    if (this.href && 
+                        !this.href.includes('#') && 
+                        !this.hasAttribute('target') &&
+                        this.hostname === window.location.hostname &&
+                        !this.href.startsWith('mailto:') &&
+                        !this.href.startsWith('tel:') &&
+                        !this.href.startsWith('javascript:')) {
+                        
+                        e.preventDefault();
+                        const destination = this.href;
+                        
+                        transition.classList.add('active');
+                        document.body.classList.add('transitioning');
+                        
+                        setTimeout(() => {
+                            window.location.href = destination;
+                        }, 1500);
+                    }
+                });
+            });
+        }
+    });
+</script>
 
 </body>
 </html>
