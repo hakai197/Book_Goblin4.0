@@ -239,6 +239,288 @@
     font-weight: 500;
     color: #aaa;
 }
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 1024px) {
+    .hero-section {
+        flex-direction: column;
+        padding: 30px 24px;
+        align-items: center;
+        gap: 30px;
+        left: 0;
+    }
+    
+    .carousel-container {
+        margin-right: 0;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .carousel {
+        height: 350px;
+        width: 100%;
+    }
+    
+    .hero {
+        width: 100%;
+        height: 350px;
+    }
+    
+    .snapshot {
+        margin: 30px 24px;
+        padding: 24px;
+        max-width: 100%;
+    }
+    
+    .stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+    
+    .stat {
+        padding: 15px;
+    }
+    
+    .stat h3 {
+        font-size: 28px;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .user-menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .main {
+        padding: 20px;
+    }
+    
+    .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .btn {
+        min-width: 140px;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .hero-section {
+        padding: 20px;
+    }
+    
+    .hero {
+        height: 250px;
+    }
+    
+    .carousel-container {
+        padding: 12px;
+    }
+    
+    .carousel {
+        height: 300px;
+    }
+    
+    .carousel-header h3 {
+        font-size: 18px;
+    }
+    
+    .stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .snapshot-header {
+        font-size: 14px;
+        padding: 8px 16px;
+        margin-bottom: 15px;
+    }
+    
+    .stat h3 {
+        font-size: 32px;
+    }
+    
+    .stat span {
+        font-size: 13px;
+    }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 576px) {
+    .header h1 {
+        font-size: 24px;
+    }
+    
+    .header p {
+        font-size: 14px;
+    }
+    
+    .hero-section {
+        padding: 15px;
+        gap: 20px;
+    }
+    
+    .hero {
+        height: 200px;
+    }
+    
+    .carousel {
+        height: 280px;
+    }
+    
+    .book-slide img {
+        height: 180px;
+    }
+    
+    .book-info h4 {
+        font-size: 13px;
+    }
+    
+    .book-info p {
+        font-size: 11px;
+    }
+    
+    .nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        width: 100%;
+        max-width: 280px;
+        margin-top: 5px;
+    }
+    
+    .snapshot {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+    
+    .stat h3 {
+        font-size: 28px;
+    }
+    
+    footer {
+        font-size: 12px;
+        padding: 15px;
+    }
+}
+
+/* Large devices (desktops, 1025px and up) */
+@media (min-width: 1025px) {
+    .hero-section {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .snapshot {
+        max-width: 600px;
+        margin: 40px auto;
+    }
+}
+
+/* For very large screens */
+@media (min-width: 1400px) {
+    .hero-section {
+        max-width: 1400px;
+    }
+    
+    .hero {
+        height: 500px;
+    }
+    
+    .carousel-container {
+        flex: 0 0 280px;
+    }
+    
+    .carousel {
+        height: 380px;
+        width: 250px;
+    }
+}
+
+/* For high resolution displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero img,
+    .book-slide img,
+    .user-menu img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* For dark mode preference */
+@media (prefers-color-scheme: dark) {
+    .carousel-container,
+    .book-slide {
+        background: #7a3fd9;
+    }
+    
+    .carousel-header h3,
+    .carousel-header p,
+    .book-info h4,
+    .book-info p {
+        color: #ffffff;
+    }
+}
+
+/* For reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .book-slide,
+    .page-transition,
+    .btn {
+        transition: none;
+    }
+    
+    .carousel-indicators .indicator {
+        transition: none;
+    }
+    
+    .fade-up {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* For touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .btn {
+        padding: 14px 20px; /* Larger touch target */
+    }
+    
+    .indicator {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .dropdown-toggle::after {
+        display: none; /* Remove hover-dependent elements */
+    }
+}
 </style>
 
 </head>
