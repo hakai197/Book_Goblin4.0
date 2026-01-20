@@ -10,6 +10,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel ='stylesheet' href='styles.css'>
+ <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+      <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
 
 <style>
 
@@ -49,6 +52,110 @@
 .nav-link:hover {
     color: inherit;
 }
+/* Pure CSS Account Dropdown - No JavaScript */
+.account-dropdown-btn {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.account-dropdown-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Hidden checkbox to control dropdown */
+.account-dropdown-checkbox {
+    display: none;
+}
+
+/* Account Dropdown Content */
+.account-dropdown-content {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    min-width: 220px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 1000;
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Show dropdown when checkbox is checked */
+.account-dropdown-checkbox:checked ~ .account-dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Dropdown links */
+.account-dropdown-content a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.account-dropdown-content a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-left-color: #9b4dff;
+    padding-left: 24px;
+}
+
+.option-icon {
+    font-size: 16px;
+    width: 24px;
+    text-align: center;
+}
+
+.account-dropdown-content .sign-out-option {
+    color: #ff6b6b;
+}
+
+.account-dropdown-content .sign-out-option:hover {
+    background: rgba(255, 107, 107, 0.1);
+    border-left-color: #ff6b6b;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 8px 0;
+}
+
+/* Make the entire user-menu relative for positioning */
+.user-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
 .hero-section {
     display: flex;
@@ -58,6 +165,7 @@
     left:-120px;
     
 }
+
 
 .hero {
     flex: 1;
@@ -74,8 +182,52 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+
 }
 
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: bookReveal 2.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+    transform-style: preserve-3d;
+}
+
+@keyframes bookReveal {
+    0% {
+        transform: rotateY(-90deg) rotateX(15deg) scale(0.6) translateY(20px);
+        opacity: 0;
+        filter: blur(4px);
+    }
+    60% {
+        transform: rotateY(5deg) rotateX(0) scale(1.05) translateY(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+    80% {
+        transform: rotateY(-2deg) scale(1.02);
+    }
+    100% {
+        transform: rotateY(0) scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes gentleFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(0.5deg);
+    }
+}
+
+
+.hero img.loaded {
+    animation: gentleFloat 8s ease-in-out infinite;
+}
 .carousel-container {
     flex: 0 0 220px;
     background: #9b4dff;
@@ -112,10 +264,11 @@
 /* REPLACE the existing .carousel with this smaller version: */
 .carousel {
     position: relative;
-    height: 300px; /* Reduced height */
-    width: 200px;  /* Reduced width */  
-    overflow: hidden;   
+    height: 300px;
+    width: 200px;
+    overflow: hidden;
     border-radius: 6px;
+    perspective: 1500px; /* Increased perspective for book effect */
 }
 
 .book-slide {
@@ -125,23 +278,31 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: transform 1s cubic-bezier(0.42, 0, 0.58, 1), 
+                opacity 0.5s ease 0.3s;
     background: #9b4dff;
     border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 10px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for 3D */
+    transform-style: preserve-3d;
+    transform-origin: left center; /* Makes it turn like a page */
+    transform: rotateY(120deg) scale(0.9);
+    backface-visibility: hidden;
 }
 
 .book-slide.active {
     opacity: 1;
+    transform: rotateY(0) scale(1);
 }
 
-/* REPLACE the existing .book-slide img with this: */
 .book-slide img {
     width: 100%;
-    height: 200px; /* Smaller image */
+    height: 200px;
     object-fit: cover;
     border-bottom: 1px solid #eee;
+    transform: translateZ(10px); /* Gives depth to image */
 }
 
 /* UPDATE the book info with smaller typography: */
@@ -152,7 +313,7 @@
 
 .book-info h4 {
     font-family: 'Literata', serif;
-    font-size: 14px; /* Smaller */
+    font-size: 20px; /* Smaller */
     font-weight: 600;
     color: black;
     margin: 0 0 4px 0;
@@ -532,11 +693,32 @@
         <b><h1>Book Goblin</h1></b>
         <i><p>Your Personal Library Assistant</p></i>
     </div>
-        <div class="user-menu">
-        <p>Welcome, User Name</p>
-        <img src="Img\avatar.png" alt="User Avatar">
-        <button>Sign Out</button>
+<div class="user-menu">
+    <img src="Img/avatar.png" alt="User Avatar">
+    <label for="account-dropdown-toggle" class="account-dropdown-btn">
+        Account ▼
+    </label>
+    <input type="checkbox" id="account-dropdown-toggle" class="account-dropdown-checkbox">
+    <div class="account-dropdown-content">
+        <a href="#" class="account-option">
+            <span class="option-icon">👑</span>
+            Switch to Admin
+        </a>
+        <a href="#" class="account-option">
+            <span class="option-icon">👤</span>
+            Switch to User
+        </a>
+        <a href="#" class="account-option">
+            <span class="option-icon">➕</span>
+            Add Account
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="sign-out-option">
+            <span class="option-icon">🚪</span>
+            Sign Out
+        </a>
     </div>
+</div>
 </header>
 
 <section class="main">
@@ -604,7 +786,7 @@
     </nav>
 <div class="hero-section">
     <div class="hero">
-        <img src="Img\BookGoblinMess.png" alt="Book Goblin">
+        <img src="Img\BookGoblinMess.png" alt="Book Goblin" class ="rotate-in">
     </div>
     <div class="carousel-container">
     <div class="carousel-header">

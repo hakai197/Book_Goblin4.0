@@ -10,6 +10,110 @@
 <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel='stylesheet' href='styles.css'>
 <style>
+    /* Pure CSS Account Dropdown - No JavaScript */
+.account-dropdown-btn {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.account-dropdown-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Hidden checkbox to control dropdown */
+.account-dropdown-checkbox {
+    display: none;
+}
+
+/* Account Dropdown Content */
+.account-dropdown-content {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    min-width: 220px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 1000;
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Show dropdown when checkbox is checked */
+.account-dropdown-checkbox:checked ~ .account-dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Dropdown links */
+.account-dropdown-content a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.account-dropdown-content a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-left-color: #9b4dff;
+    padding-left: 24px;
+}
+
+.option-icon {
+    font-size: 16px;
+    width: 24px;
+    text-align: center;
+}
+
+.account-dropdown-content .sign-out-option {
+    color: #ff6b6b;
+}
+
+.account-dropdown-content .sign-out-option:hover {
+    background: rgba(255, 107, 107, 0.1);
+    border-left-color: #ff6b6b;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 8px 0;
+}
+
+/* Make the entire user-menu relative for positioning */
+.user-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
 .hero-section {
     display: flex;
@@ -52,6 +156,7 @@
     transform: translateY(-10%);
     
 }
+
 
 .hero-cards {
     flex: 1;
