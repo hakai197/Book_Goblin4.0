@@ -8,374 +8,238 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel='stylesheet' href='styles.css'>
 
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel='stylesheet' href='styles.css'>
 </head>
+<style>
+    .hero-image-container {
+        width: 50%;
+        max-width: 800px;
+        margin: 110px;
+        margin-top: -20%; /* Adjust this value to position vertically */
+        position: relative;
+        overflow: visible; /* Allow stats to overflow if needed */
+    }
+    .carousel-container {
+     margin-left: -30%;
+     margin-top: -5%;
+    }
+</style>
 
 <body>
 
+
 <header class="header">
     <div>
-        <b><h1>Book Goblin</h1></b>
-        <i><p>Your Personal Library Assistant</p></i>
+        <h1>Book Goblin</h1>
+        <p>Your Personal Library Assistant</p>
     </div>
-<div class="user-menu">
-    <img src="Img/avatar.png" alt="User Avatar">
-    <label for="account-dropdown-toggle" class="account-dropdown-btn">
-        Account ▼
-    </label>
-    <input type="checkbox" id="account-dropdown-toggle" class="account-dropdown-checkbox">
-    <div class="account-dropdown-content">
-        <a href="#" class="account-option">
-            <span class="option-icon">👑</span>
-            Switch to Admin
-        </a>
-        <a href="#" class="account-option">
-            <span class="option-icon">👤</span>
-            Your Profile
-        </a>
-        <a href="#" class="account-option">
-            <span class="option-icon">➕</span>
-            Add Account
-        </a>
-        <div class="dropdown-divider"></div>
-        <a href="#" class="sign-out-option">
-            <span class="option-icon">🚪</span>
-            Sign Out
-        </a>
+    
+    <div class="user-menu">
+        <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="Img/avatar.png" alt="User Avatar">
+            <span>Account</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">
+                <span>👑</span>
+                Switch to Admin
+            </a></li>
+            <li><a class="dropdown-item" href="#">
+                <span>👤</span>
+                Your Profile
+            </a></li>
+            <li><a class="dropdown-item" href="#">
+                <span>➕</span>
+                Add Account
+            </a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#">
+                <span>🚪</span>
+                Sign Out
+            </a></li>
+        </ul>
     </div>
-</div>
 </header>
 
-<section class="main">
-
-    <nav class="nav">
-        <a href="getstarted.html" class="btn hover-lift" aria-label="Get Started">
-            <span class="icon" aria-hidden="true">
+<div class="main-container">
+    <!-- Left Navigation Sidebar -->
+    <div class="nav-sidebar">
+        <div class="nav-container">
+            <a href="dashboard.html" class="nav-btn" aria-label="Dashboard Home">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 21s4-4 9-4 9 4 9 4" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 2v9" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M16 4l-4-2-4 2" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 21s4-4 9-4 9 4 9 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 2v9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 4l-4-2-4 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-            </span>
-            <span>Home</span>
-        </a>
+                <span>Home</span>
+            </a>
 
-        <a href="books.html" class="btn secondary hover-lift nav-link" aria-label="My Books">
-            <span class="icon" aria-hidden="true">
+            <a href="books.html" class="nav-btn secondary" aria-label="My Books">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 6h14v12H3z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
                     <path d="M7 6v12" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
                 </svg>
-            </span>
-            <span>My Books</span>
-        </a>
+                <span>My Books</span>
+            </a>
 
-        <a href="discover.html" class="btn secondary hover-lift nav-link" aria-label="Discover">
-            <span class="icon" aria-hidden="true">
+            <a href="discover.html" class="nav-btn secondary" aria-label="Discover">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2l2.09 6.26L20 11l-5 3.64L15.18 21 12 17.77 8.82 21 9 14.64 4 11l5.91-2.74L12 2z" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-            </span>
-            <span>Discover</span>
-        </a>
+                <span>Discover</span>
+            </a>
 
-        <a href="https://www.hpb.com/" class="btn secondary hover-lift" aria-label="Collect More Books">
-            <span class="icon" aria-hidden="true">
+            <a href="https://www.hpb.com/" class="nav-btn secondary" aria-label="Collect More Books">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-            </span>
-            <span>Buy Books</span>
-        </a>
+                <span>Buy Books</span>
+            </a>
 
-        <div class="dropdown">
-            <button class="btn secondary dropdown-toggle hover-lift" aria-label="Menu">
-                <span class="icon" aria-hidden="true">
+            <div class="dropdown">
+                <button class="nav-btn secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-label="Menu">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                </span>
-                <span>Menu</span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#settings">Settings</a></li>
-                <li><a href="#wishlist">Wishlist</a></li>
-                <li><a href="#reading-goals">Reading Goals</a></li>
-                <li><a href="#favorites">Favorites</a></li>
-                <li><a href="#help">Help & Support</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- EXACTLY like  dashboard hero-section -->
-   <!-- Updated hero-section to match dashboard structure -->
-    <div class="hero-section">
-        <!-- Hero left with image -->
-        <div class="hero-left">
-            <div class="hero-image">
-                <img src="Img\Searching Goblin.png" alt="Book Goblin Searching">
-            </div>
-        </div>
-        
-        <!-- Hero cards grid -->
-        <div class="hero-cards">
-            <!-- Hero card 1 - Modified to be a card instead of direct image -->
-            <div class="hero">
-                <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1597695864i/54493401.jpg" alt="Project Hail Mary">
-            </div>
-            
-            <!-- Hero card 2 -->
-            <div class="hero">
-                <img src="https://m.media-amazon.com/images/I/71GHKo78YBL._SL1500_.jpg" alt="Gideon the Ninth">
-            </div>
-            
-            <!-- Hero card 3 -->
-            <div class="hero">
-                <img src="https://m.media-amazon.com/images/I/91NXdVnMoGL._SL1500_.jpg" alt="The Priory of the Orange Tree">
-            </div>
-            
-            <!-- Hero card 4 -->
-            <div class="hero">
-                <img src="https://m.media-amazon.com/images/I/7182EdD2iWL._SY522_.jpg" alt="Stranger In A Strange Land">
+                    <span>Menu</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#settings">Settings</a></li>
+                    <li><a class="dropdown-item" href="#wishlist">Wishlist</a></li>
+                    <li><a class="dropdown-item" href="#reading-goals">Reading Goals</a></li>
+                    <li><a class="dropdown-item" href="#favorites">Favorites</a></li>
+                    <li><a class="dropdown-item" href="#help">Help & Support</a></li>
+                </ul>
             </div>
         </div>
     </div>
-        
-        <!-- This is the carousel container - same as dashboard -->
-        <!-- <div class="carousel-container">
-            <div class="carousel-header">
-                <h3>Recommended for You</h3>
-                <p>Based on your reading</p>
-            </div>
-            <div class="carousel">
-                <div class="book-slide active">
-                    <img src="https://m.media-amazon.com/images/I/81wGzzxqHSL._SL1500_.jpg" alt="Red Rising">
-                    <div class="book-info">
-                        <h4>Red Rising</h4>
-                        <p>Pierce Brown</p>
-                    </div>
-                </div>
-                <div class="book-slide">
-                    <img src="https://m.media-amazon.com/images/I/7182EdD2iWL._SY522_.jpg" alt="Stranger In A Strange Land">
-                    <div class="book-info">
-                        <h4>Stranger In A Strange Land</h4>
-                        <p>Robert Heinlein</p>
-                    </div>
-                </div>
-                <div class="book-slide">
-                    <img src="https://m.media-amazon.com/images/I/71agPjqADHL._SL1500_.jpg" alt="Dungeon Crawler Carl">
-                    <div class="book-info">
-                        <h4>Dungeon Crawler Carl</h4>
-                        <p>Matt Dinniman</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-indicators">
-                <span class="indicator active"></span>
-                <span class="indicator"></span>
-                <span class="indicator"></span>
-            </div>
-        </div>
-    </div> -->
 
-</section>
+    <!-- Right Content Area -->
+    <div class="content-area">
+        <div class="hero-section">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="hero-image-container">
+                            <div class="hero-image">
+                                <img src="Img/Searching Goblin.png" alt="Book Goblin Searching" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="carousel-container">
+                            <div class="carousel-header">
+                                <h3>Recommended for You</h3>
+                                <p>Based on your reading</p>
+                            </div>
+                            
+                            <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
+                              
+                                
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img class="book-cover-img d-block w-100" 
+                                             src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1597695864i/54493401.jpg" 
+                                             alt="Project Hail Mary">
+                                        <div class="book-caption">
+                                            <h5>Project Hail Mary</h5>
+                                            <p>Andy Weir</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="carousel-item">
+                                        <img class="book-cover-img d-block w-100" 
+                                             src="https://m.media-amazon.com/images/I/71GHKo78YBL._SL1500_.jpg" 
+                                             alt="Gideon the Ninth">
+                                        <div class="book-caption">
+                                            <h5>Gideon The Ninth</h5>
+                                            <p>Tamsyn Muir</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="carousel-item">
+                                        <img class="book-cover-img d-block w-100" 
+                                             src="https://m.media-amazon.com/images/I/91NXdVnMoGL._SL1500_.jpg" 
+                                             alt="The Priory of the Orange Tree">
+                                        <div class="book-caption">
+                                            <h5>The Priory of the Orange Tree</h5>
+                                            <p>Samantha Shannon</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!-- Books grid section - this is different from dashboard but that's OK -->
-<section class="books-container">
-    <div class="books-header">
-        <h2>More Books to Explore</h2>
+        <section class="books-container">
+            <div class="container">
+                <div class="books-header">
+                    <h2>More Books to Explore</h2>
+                </div>
+                <div class="books-grid">
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://m.media-amazon.com/images/I/71p5luifDjL._SL1500_.jpg" alt="The Will Of The Many">
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">The Will Of The Many</h3>
+                            <p class="book-author">James Islington</p>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://m.media-amazon.com/images/I/815EJibD9DL._SY466_.jpg" alt="The Shadow of the Gods">
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">The Shadow of the Gods</h3>
+                            <p class="book-author">John Gwynne</p>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://m.media-amazon.com/images/I/91U6rc7u0yL._SL1500_.jpg" alt="Mistborn">
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">Mistborn</h3>
+                            <p class="book-author">Brandon Sanderson</p>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://m.media-amazon.com/images/I/71agPjqADHL._SL1500_.jpg" alt="Dungeon Crawler Carl">
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">Dungeon Crawler Carl</h3>
+                            <p class="book-author">Matt Dinniman</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-    <div class="books-grid">
-        <div class="book-card">
-            <div class="book-cover">
-                <img src="https://m.media-amazon.com/images/I/71p5luifDjL._SL1500_.jpg" alt="The Will Of The Many">
-            </div>
-            <div class="book-info">
-                <h3 class="book-title">The Will Of The Many</h3>
-                <p class="book-author">James Islington</p>
-            </div>
-        </div>
-        <div class="book-card">
-            <div class="book-cover">
-                <img src="https://m.media-amazon.com/images/I/815EJibD9DL._SY466_.jpg" alt="The Shadow of the Gods">
-            </div>
-            <div class="book-info">
-                <h3 class="book-title">The Shadow of the Gods</h3>
-                <p class="book-author">John Gwynne</p>
-            </div>
-        </div>
-        <div class="book-card">
-            <div class="book-cover">
-                <img src="https://m.media-amazon.com/images/I/91U6rc7u0yL._SL1500_.jpg" alt="Mistborn">
-            </div>
-            <div class="book-info">
-                <h3 class="book-title">Mistborn</h3>
-                <p class="book-author">Brandon Sanderson</p>
-            </div>
-        </div>
-        <div class="book-card">
-            <div class="book-cover">
-                <img src="https://m.media-amazon.com/images/I/71agPjqADHL._SL1500_.jpg" alt="Dungeon Crawler Carl">
-            </div>
-            <div class="book-info">
-                <h3 class="book-title">Dungeon Crawler Carl</h3>
-                <p class="book-author">Matt Dinniman</p>
-            </div>
-        </div>
-    </div>
-</section>
+</div>
 
 <footer>
     &copy; U197 Designs 2025
 </footer>
 
-<div class="page-transition" id="pageTransition">
-    <img src="Img/page_turning.gif" alt="Transition" class="transition-gif">
-</div>
-
-<script>
-// Intersection Observer for animations
-(function(){
-  const els = document.querySelectorAll('[data-animate]');
-  if(!els.length) return;
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('in-view');
-        io.unobserve(entry.target);
-      }
-    });
-  }, {threshold: 0.08});
-  els.forEach(el => io.observe(el));
-})();
-
-// Dropdown menu functionality
-(function(){
-  const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-  
-  dropdownToggles.forEach(toggle => {
-    toggle.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      const dropdown = this.closest('.dropdown');
-      const isActive = dropdown.classList.contains('active');
-      
-      // Close all dropdowns
-      document.querySelectorAll('.dropdown').forEach(d => {
-        d.classList.remove('active');
-      });
-      
-      // Toggle current dropdown
-      if (!isActive) {
-        dropdown.classList.add('active');
-      }
-    });
-  });
-  
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.dropdown')) {
-      document.querySelectorAll('.dropdown').forEach(dropdown => {
-        dropdown.classList.remove('active');
-      });
-    }
-  });
-})();
-
-// Page transition for navigation links
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const href = link.getAttribute('href');
-    const transition = document.getElementById('pageTransition');
-    
-    transition.classList.add('active');
-    
-    setTimeout(() => {
-      window.location.href = href;
-    }, 600);
-  });
-});
-
-// Carousel functionality
-(function() {
-    const slides = document.querySelectorAll('.book-slide');
-    const indicators = document.querySelectorAll('.indicator');
-    
-    // Only run if carousel exists
-    if (slides.length === 0) return;
-    
-    let currentSlide = 0;
-    
-    function showSlide(index) {
-        // Hide all slides
-        slides.forEach(slide => slide.classList.remove('active'));
-        indicators.forEach(indicator => indicator.classList.remove('active'));
-        
-        // Show current slide
-        slides[index].classList.add('active');
-        indicators[index].classList.add('active');
-        
-        currentSlide = index;
-    }
-    
-    function nextSlide() {
-        let nextIndex = currentSlide + 1;
-        if (nextIndex >= slides.length) {
-            nextIndex = 0;
-        }
-        showSlide(nextIndex);
-    }
-    
-    // Auto-cycle every 4 seconds
-    let carouselInterval = setInterval(nextSlide, 4000);
-    
-    // Pause on hover
-    const carousel = document.querySelector('.carousel');
-    if (carousel) {
-        carousel.addEventListener('mouseenter', () => {
-            clearInterval(carouselInterval);
-        });
-        
-        carousel.addEventListener('mouseleave', () => {
-            carouselInterval = setInterval(nextSlide, 4000);
-        });
-        
-        // Click indicators to go to specific slide
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                showSlide(index);
-            });
-        });
-    }
-})();
-
-// Image loading animation - same as dashboard
-window.addEventListener('load', function() {
-    // Add loaded class to hero image for gentle float animation
-    const heroImage = document.querySelector('.hero img');
-    if (heroImage) {
-        heroImage.classList.add('loaded');
-    }
-    
-    // Add loaded class to carousel images
-    const carouselImages = document.querySelectorAll('.book-slide img');
-    carouselImages.forEach((img, index) => {
-        setTimeout(() => {
-            img.classList.add('loaded');
-        }, index * 100);
-    });
-    
-    // Add loaded class to book cover images
-    const bookCoverImages = document.querySelectorAll('.book-cover img');
-    bookCoverImages.forEach((img, index) => {
-        setTimeout(() => {
-            img.classList.add('loaded');
-        }, index * 100 + 300);
-    });
-});
-</script>
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

@@ -8,866 +8,352 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel='stylesheet' href='styles.css'>
-
 <style>
-
-.books-container {
-    padding: 40px 48px;
-}
-
-.books-header {
-    margin-bottom: 40px;
-}
-
-.books-header h2 {
-    font-family: "Literata", serif;
-    font-size: 36px;
-    font-weight: 700;
-    background: var(--grad-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 10px;
-}
-
-.books-filters {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
-}
-
-.hero-section {
-    display: flex;
-    gap: 32px;
-    align-items: flex-start;
-    padding: 40px 48px;
-    position: relative; 
-    min-height: 400px;
-    margin-top: -100px;
-}
-
-.books-hero-image {
-    width:100%;
-    border-radius: 16px;
-    position: relative;
-    left: -120px;
-    margin-right: -120px;
-    box-shadow: 20px 20px 40px rgba(0,0,0,0.3);
-    overflow: hidden; 
-    margin-top: -400px;
-    z-index: 1;;
-}
-
-.books-hero-image img {
-    width: 100%;
-    height: 100%;
-}
-
-.stats-window {
-    background: var(--solid-glass);
-    backdrop-filter: blur(100px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 20px 24px;
-    flex: 1;
-    min-width: 200px;
-    max-width: 400px;
-    z-index: 100;
-    position: relative;
-    margin-top: 200px;
-    margin-left: -1000px;
-}
-
-.stats-window h3 {
-    font-family: "Literata", serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 24px;
-}
-
-.stat-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.stat-item:last-child {
-    border-bottom: none;
-}
-
-.stat-label {
-    font-family: "Inter", sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #aaa;
-}
-
-.stat-value {
-    font-family: "Inter", sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    background: var(--text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.filter-btn {
-    padding: 10px 18px;
-    background: rgba(107, 63, 179, 0.15);
-    border: 1px solid rgba(107, 63, 179, 0.3);
-    border-radius: 12px;
-    color: var(--text);
-    font-family: "Inter", sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-    background: var(--grad-primary);
-    border-color: rgba(155, 77, 255, 0.6);
-    box-shadow: 0 0 12px rgba(155, 77, 255, 0.3);
-}
-
-.books-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 24px;
-    margin-bottom: 40px;
-}
-
-.book-card {
-    background: var(--glass);
-    backdrop-filter: blur(14px);
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-}
-
-.book-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(107, 63, 179, 0.25);
-    border-color: rgba(155, 77, 255, 0.4);
-}
-
-.book-cover {
-    width: 100%;
-    aspect-ratio: 2/3;
-    background: linear-gradient(135deg, rgba(107, 63, 179, 0.2), rgba(90, 62, 168, 0.1));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    color: #666;
-    overflow: hidden;
-}
-
-.book-cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.book-info {
-    padding: 16px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.book-title {
-    font-family: "Literata", serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 6px;
-    line-height: 1.3;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-
-.book-author {
-    font-size: 13px;
-    color: #aaa;
-    margin-bottom: 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-}
-
-.book-rating {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 8px;
-}
-
-.star {
-    color: #ffc107;
-    font-size: 12px;
-}
-
-.book-status {
-    font-size: 12px;
-    padding: 6px 10px;
-    background: rgba(107, 63, 179, 0.2);
-    border-radius: 8px;
-    color: #9b4dff;
-    text-align: center;
-    margin-top: auto;
-}
-
-.empty-state {
-    text-align: center;
-    padding: 60px 40px;
-    color: #888;
-}
-
-.empty-state h3 {
-    font-family: "Literata", serif;
-    font-size: 24px;
-    margin-bottom: 12px;
-    color: #aaa;
-}
-
-
-
-.page-transition {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-
-.page-transition.active {
-    display: flex;
-}
-
-.transition-gif {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.nav-link:hover {
-    color: inherit;
-}
-
-
-/* Large devices (desktops, 1024px and down) */
-@media (max-width: 1024px) {
-    .hero-section {
-        flex-direction: column;
-        gap: 20px;
-        padding: 30px 24px;
-        margin-top: -50px;
-        left: 0;
-        min-height: auto;
-    }
-    
-    .books-hero-image {
-        left: 0;
-        margin-right: 0;
-        margin-top: -200px;
-        width: 100%;
-        max-width: 600px;
-        align-self: center;
-    }
-    
-    .stats-window {
-        margin-left: 0;
-        margin-top: 20px;
-        max-width: 100%;
-        width: 100%;
-    }
-    
-    .books-container {
-        padding: 30px 24px;
-    }
-}
-
-/* Medium devices (tablets, 768px and down) */
-@media (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
-    
-    .header {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
+    /* Additional inline styles for cropping and positioning */
+    .content-area
+    {
         padding: 20px;
+        min-height: 100vh;
+        margin-top: -7%;
+        
     }
-    
-    .user-menu {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .main {
-        padding: 15px;
-    }
-    
-    .nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-    
-    .btn {
-        min-width: 140px;
-        padding: 10px 15px;
-        font-size: 14px;
-    }
-    
-    .hero-section {
-        padding: 20px 15px;
-        margin-top: -30px;
-    }
-    
-    .books-hero-image {
-        margin-top: -150px;
-        border-radius: 12px;
-    }
-    
-    .stats-window {
-        padding: 15px 18px;
-        border-radius: 12px;
-    }
-    
-    .stats-window h3 {
-        font-size: 18px;
-        margin-bottom: 18px;
-    }
-    
-    .stat-item {
-        padding: 12px 0;
-    }
-    
-    .stat-value {
-        font-size: 20px;
-    }
-    
-    .books-header h2 {
-        font-size: 28px;
-        text-align: center;
-    }
-    
-    .books-filters {
-        justify-content: center;
-        gap: 8px;
-    }
-    
-    .filter-btn {
-        padding: 8px 14px;
-        font-size: 13px;
-        border-radius: 8px;
-    }
-    
-    .books-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 18px;
-    }
-    
-    .book-info {
-        padding: 12px;
-    }
-    
-    .book-title {
-        font-size: 14px;
-    }
-    
-    .book-author {
-        font-size: 12px;
-    }
-}
-
-/* Small devices (mobile, 576px and down) */
-@media (max-width: 576px) {
-    .header h1 {
-        font-size: 24px;
-    }
-    
-    .header p {
-        font-size: 14px;
-    }
-    
-    .hero-section {
-        padding: 15px;
-        margin-top: 0;
-    }
-    
-    .books-hero-image {
-        margin-top: 0;
-        box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
-    }
-    
-    .stats-window {
-        margin-top: 10px;
-        padding: 12px 15px;
-    }
-    
-    .stat-item {
-        padding: 10px 0;
-    }
-    
-    .stat-label {
-        font-size: 13px;
-    }
-    
-    .stat-value {
-        font-size: 18px;
-    }
-    
-    .books-container {
-        padding: 20px 15px;
-    }
-    
-    .books-header h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-    
-    .books-filters {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        padding-bottom: 10px;
-        margin-bottom: 25px;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .books-filters::-webkit-scrollbar {
-        display: none;
-    }
-    
-    .filter-btn {
-        white-space: nowrap;
-        flex-shrink: 0;
-    }
-    
-    .books-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    
-    .book-card {
-        border-radius: 12px;
-    }
-    
-    .book-cover {
-        aspect-ratio: 3/4;
-    }
-    
-    .book-status {
-        font-size: 11px;
-        padding: 5px 8px;
-    }
-    
-    .nav {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .btn {
+    .hero-image-cropped {
         width: 100%;
-        max-width: 280px;
-        justify-content: center;
+        max-width: 1500px;
+        height: auto;
+        overflow: hidden;
+        border-radius: 20px;
+        position: relative;
+        margin: 0 auto;
     }
     
-    .dropdown-menu {
-        position: static;
+    .hero-image-cropped img {
         width: 100%;
-        max-width: 280px;
-        margin-top: 5px;
-    }
-    
-    footer {
-        font-size: 12px;
-        padding: 15px;
-    }
-}
-
-/* Extra small devices (very small mobile, 375px and down) */
-@media (max-width: 375px) {
-    .books-grid {
-        grid-template-columns: 1fr;
-        max-width: 250px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .books-hero-image img {
-        height: 250px;
+        max-width: 1500px;
+        height: auto;
         object-fit: cover;
+        object-position: center; /* Focus on top, center horizontally */
+        display: block;
+        border-radius: 20px;
+        /* Crop from top without cutting sides */
+        margin-top: -30%; /* Adjust this value to crop more/less from top */
+        margin-bottom: -5%; /* Compensate for the top crop */
+    
     }
     
-    .filter-btn {
-        padding: 7px 12px;
-        font-size: 12px;
+    .stats-overlay {
+        position: absolute;
+        top: 50%;
+        right: 10%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 90%;
+        max-width: 350px;
     }
     
-    .book-title {
-        font-size: 13px;
+    /* Make the image container responsive but maintain aspect ratio */
+    .hero-image-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 110px;
+        position: relative;
+        overflow: visible; /* Allow stats to overflow if needed */
     }
     
-    .stat-item {
-        padding: 8px 0;
-    }
-}
-
-/* Large desktops (1200px and up) */
-@media (min-width: 1200px) {
-    .hero-section {
-        max-width: 1200px;
-        margin: 0 auto;
-        margin-top: -100px;
-    }
-    
-    .books-container {
-        max-width: 1200px;
-        margin: 0 auto;
+    /* Adjust for responsive design */
+    @media (max-width: 1200px) {
+        .hero-image-cropped {
+            max-width: 700px;
+        }
+        
+        .stats-overlay {
+            right: 5%;
+            max-width: 300px;
+        }
     }
     
-    .books-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
-}
-
-/* Very large screens (1400px and up) */
-@media (min-width: 1400px) {
-    .hero-section {
-        max-width: 1400px;
-    }
-    
-    .books-container {
-        max-width: 1400px;
-    }
-    
-    .books-grid {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    }
-}
-
-/* For high resolution displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .books-hero-image img,
-    .book-cover img,
-    .user-menu img {
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
-    }
-}
-
-/* For dark mode preference */
-@media (prefers-color-scheme: dark) {
-    .filter-btn {
-        background: rgba(107, 63, 179, 0.25);
-        border-color: rgba(155, 77, 255, 0.2);
+    @media (max-width: 992px) {
+        .hero-image-cropped {
+            max-width: 600px;
+        }
+        
+        .stats-overlay {
+            right: 3%;
+            max-width: 280px;
+        }
+        
+        .hero-image-cropped img {
+            margin-top: -10%;
+            margin-bottom: -3%;
+        }
     }
     
-    .filter-btn:hover,
-    .filter-btn.active {
-        background: var(--grad-primary);
-    }
-}
-
-/* For reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-    .book-card,
-    .page-transition,
-    .filter-btn {
-        transition: none;
-    }
-    
-    .book-card:hover {
-        transform: none;
-    }
-    
-    .fade-up {
-        animation: none;
-        opacity: 1;
-        transform: none;
-    }
-}
-
-/* For touch devices */
-@media (hover: none) and (pointer: coarse) {
-    .book-card:hover {
-        transform: none;
-        box-shadow: 0 5px 15px rgba(107, 63, 179, 0.15);
+    @media (max-width: 768px) {
+        .hero-image-cropped {
+            max-width: 500px;
+        }
+        
+        .stats-overlay {
+            position: relative;
+            top: 0;
+            right: 0;
+            transform: none;
+            width: 100%;
+            max-width: 100%;
+            margin-top: -40px;
+            margin-bottom: 20px;
+        }
+        
+        .hero-image-cropped img {
+            margin-top: -8%;
+            margin-bottom: -2%;
+        }
     }
     
-    .btn,
-    .filter-btn {
-        padding: 12px 16px; /* Larger touch target */
+    @media (max-width: 576px) {
+        .hero-image-cropped {
+            max-width: 100%;
+        }
+        
+        .hero-image-cropped img {
+            margin-top: -5%;
+            margin-bottom: -1%;
+        }
+        
+        .stats-overlay {
+            margin-top: -30px;
+        }
     }
-    
-    .books-filters {
-        gap: 6px;
-    }
-}
-
 </style>
-
 </head>
 
 <body>
 
 <header class="header">
     <div>
-        <b><h1>Book Goblin</h1></b>
-        <i><p>Your Personal Library Assistant</p></i>
+        <h1>Book Goblin</h1>
+        <p>Your Personal Library Assistant</p>
     </div>
+    
     <div class="user-menu">
-        <p>User Name</p>
-        <img src="Img\avatar.png" alt="User Avatar">
-        <button>Sign Out</button>
+        <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="Img/avatar.png" alt="User Avatar">
+            <span>Account</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">
+                <span>👑</span>
+                Switch to Admin
+            </a></li>
+            <li><a class="dropdown-item" href="#">
+                <span>👤</span>
+                Your Profile
+            </a></li>
+            <li><a class="dropdown-item" href="#">
+                <span>➕</span>
+                Add Account
+            </a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#">
+                <span>🚪</span>
+                Sign Out
+            </a></li>
+        </ul>
     </div>
 </header>
 
-<section class="main">
-    <nav class="nav">
-        <a href="dashboard.html" class="btn hover-lift nav-link" aria-label="Dashboard">
-            <span class="icon" aria-hidden="true">
+<div class="main-container">
+    <!-- Left Navigation Sidebar -->
+    <div class="nav-sidebar">
+        <div class="nav-container">
+            <a href="dashboard.html" class="nav-btn" aria-label="Dashboard">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 21s4-4 9-4 9 4 9 4" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 2v9" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M16 4l-4-2-4 2" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 21s4-4 9-4 9 4 9 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 2v9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 4l-4-2-4 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-            </span>
-            <span>Home</span>
-        </a>
+                <span>Home</span>
+            </a>
 
-        <button class="btn secondary hover-lift" aria-label="My Books">
-            <span class="icon" aria-hidden="true">
+            <a href="books.html" class="nav-btn secondary" aria-label="My Books">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 6h14v12H3z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
                     <path d="M7 6v12" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
                 </svg>
-            </span>
-            <span>My Books</span>
-        </button>
+                <span>My Books</span>
+            </a>
 
-       <a href="discover.html" class="btn secondary hover-lift nav-link" aria-label="Discover">
-            <span class="icon" aria-hidden="true">
+            <a href="discover.html" class="nav-btn secondary" aria-label="Discover">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2l2.09 6.26L20 11l-5 3.64L15.18 21 12 17.77 8.82 21 9 14.64 4 11l5.91-2.74L12 2z" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-            </span>
-            <span>Discover</span>
-        </a>
-        <div class="dropdown">
-            <button class="btn secondary dropdown-toggle hover-lift" aria-label="Menu">
-                <span class="icon" aria-hidden="true">
+                <span>Discover</span>
+            </a>
+
+            <div class="dropdown">
+                <button class="nav-btn secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-label="Menu">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                </span>
-                <span>Menu</span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#settings">Settings</a></li>
-                <li><a href="#wishlist">Wishlist</a></li>
-                <li><a href="#reading-goals">Reading Goals</a></li>
-                <li><a href="#favorites">Favorites</a></li>
-                <li><a href="#help">Help & Support</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    </nav>
-    
-    <div class="hero-section">
-        <div class="books-hero-image">
-            <img src="Img\Chilling Goblin 3.0.png" alt="Chillin Goblin">
-        </div>
-        <div class="stats-window">
-            <h3>Reading Stats</h3>
-            <div class="stat-item">
-                <span class="stat-label">Pages Read</span>
-                <span class="stat-value">1,250</span>
+                    <span>Menu</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#settings">Settings</a></li>
+                    <li><a class="dropdown-item" href="#wishlist">Wishlist</a></li>
+                    <li><a class="dropdown-item" href="#reading-goals">Reading Goals</a></li>
+                    <li><a class="dropdown-item" href="#favorites">Favorites</a></li>
+                    <li><a class="dropdown-item" href="#help">Help & Support</a></li>
+                </ul>
             </div>
-            <div class="stat-item">
-                <span class="stat-label">Reading Streak</span>
-                <span class="stat-value">12 days</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Reading Goal</span>
-                <span class="stat-value">2,000 pages</span>
-            </div>
-        </div>
-        
-    </div>
-</section>
-
-
-<section class="books-container">
-    <div class="books-header">
-        <h2>My Books</h2>
-        
-        <div class="books-filters">
-            <button class="filter-btn active">All Books</button>
-            <button class="filter-btn">Reading</button>
-            <button class="filter-btn">Completed</button>
-            <button class="filter-btn">TBR</button>
-            <button class="filter-btn">Favorites</button>
         </div>
     </div>
 
-    <div class="books-grid">
-      
-
-
-        <!-- Sample Book Card -->
-        <div class="book-card fade-up" data-animate>
-            <div class="book-cover">
-             <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1597695864i/54493401.jpg" alt="Project Hail Mary">
-            </div>
-            <div class="book-info">
-                <h3 class="book-title">Project Hail Mary</h3>
-                <p class="book-author">Andy Weir</p>
-                <div class="book-rating">
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">☆</span>
-                    <span class="star">☆</span>
+    <!-- Right Content Area -->
+    <div class="content-area">
+        <div class="hero-section">
+            <div class="container-fluid position-relative">
+                <div class="row justify-content-left">
+                    <!-- Hero Image with cropping -->
+                    <div class="col-12 position-left">
+                        <div class="hero-image-container">
+                            <div class="hero-image-cropped">
+                                <img src="Img/Chilling Goblin 3.0.png" alt="Chillin Goblin" class="img-fluid">
+                            </div>
+                            
+                            <!-- Stats Window - Overlay centered on image -->
+                            <div class="stats-overlay">
+                                <div class="stats-window" style="background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(15px); border: 1px solid rgba(155, 77, 255, 0.4); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+                                    <h3 style="color: #fff; margin-bottom: 1.5rem; font-family: 'Literata', serif; font-size: 1.5rem;">Reading Stats</h3>
+                                    <div class="stat-item">
+                                        <span class="stat-label" style="color: #ccc;">Pages Read</span>
+                                        <span class="stat-value" style="color: #9b4dff;">1,250</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label" style="color: #ccc;">Reading Streak</span>
+                                        <span class="stat-value" style="color: #9b4dff;">12 days</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label" style="color: #ccc;">Reading Goal</span>
+                                        <span class="stat-value" style="color: #9b4dff;">2,000 pages</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="book-status">TBR</div>
             </div>
         </div>
 
-     
-
-        
-
-        <!-- Sample Book Card -->
-        <div class="book-card fade-up" data-animate>
-            <div class="book-cover">
-                <img src="https://m.media-amazon.com/images/I/81DMp7F91LL._SL1500_.jpg" alt="Dune">
-            </div>
-            <div class="book-info">
-                <h3 class="book-title">Dune</h3>
-                <p class="book-author">Frank Herbert</p>
-                <div class="book-rating">
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
+        <section class="books-container">
+            <div class="container">
+                <div class="books-header">
+                    <h2>My Books</h2>
+                    
+                    <div class="books-filters">
+                        <button class="filter-btn active">All Books</button>
+                        <button class="filter-btn">Reading</button>
+                        <button class="filter-btn">Completed</button>
+                        <button class="filter-btn">TBR</button>
+                        <button class="filter-btn">Favorites</button>
+                    </div>
                 </div>
-                <div class="book-status">TBR</div>
+
+                <div class="books-grid">
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1597695864i/54493401.jpg" alt="Project Hail Mary">
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">Project Hail Mary</h3>
+                            <p class="book-author">Andy Weir</p>
+                            <div class="book-rating">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">☆</span>
+                                <span class="star">☆</span>
+                            </div>
+                            <div class="book-status">TBR</div>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://m.media-amazon.com/images/I/81DMp7F91LL._SL1500_.jpg" alt="Dune">
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">Dune</h3>
+                            <p class="book-author">Frank Herbert</p>
+                            <div class="book-rating">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                            <div class="book-status">TBR</div>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://m.media-amazon.com/images/I/71p5luifDjL._SL1500_.jpg" alt="The Will Of The Many">
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">The Will Of The Many</h3>
+                            <p class="book-author">James Islington</p>
+                            <div class="book-rating">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">☆</span>
+                            </div>
+                            <div class="book-status">Reading</div>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://m.media-amazon.com/images/I/815EJibD9DL._SY466_.jpg" alt="The Shadow of the Gods">
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">The Shadow of the Gods</h3>
+                            <p class="book-author">John Gwynne</p>
+                            <div class="book-rating">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">☆</span>
+                            </div>
+                            <div class="book-status">Completed</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </div>
-</section>
+</div>
 
 <footer>
     &copy; U197 Designs 2025
 </footer>
 
-<div class="page-transition" id="pageTransition">
-    <img src="Img\page_turning.gif" alt="Transition" class="transition-gif">
-</div>
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-(function(){
-  const els = document.querySelectorAll('[data-animate]');
-  if(!els.length) return;
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('in-view');
-        io.unobserve(entry.target);
-      }
-    });
-  }, {threshold: 0.08});
-  els.forEach(el => io.observe(el));
-})();
-
-(function(){
-  const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-  
-  dropdownToggles.forEach(toggle => {
-    toggle.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      const dropdown = this.closest('.dropdown');
-      const isActive = dropdown.classList.contains('active');
-      
-      // Close all dropdowns
-      document.querySelectorAll('.dropdown').forEach(d => {
-        d.classList.remove('active');
-      });
-      
-      // Toggle current dropdown
-      if (!isActive) {
-        dropdown.classList.add('active');
-      }
-    });
-  });
-  
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.dropdown')) {
-      document.querySelectorAll('.dropdown').forEach(dropdown => {
-        dropdown.classList.remove('active');
-      });
-    }
-  });
-})();
-
 // Filter buttons functionality
 const filterBtns = document.querySelectorAll('.filter-btn');
 filterBtns.forEach(btn => {
   btn.addEventListener('click', function() {
     filterBtns.forEach(b => b.classList.remove('active'));
     this.classList.add('active');
-  });
-});
-
-// Page transition for navigation links
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const href = link.getAttribute('href');
-    const transition = document.getElementById('pageTransition');
-    
-    transition.classList.add('active');
-    
-    setTimeout(() => {
-      window.location.href = href;
-    }, 600);
   });
 });
 </script>
