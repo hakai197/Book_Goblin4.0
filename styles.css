@@ -1196,3 +1196,41 @@ body.login-page footer {
         padding: 1rem;
     }
 }
+    .page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.page-transition.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.page-transition img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Or use 'contain' if you want to see the whole GIF */
+}
+
+/* Alternative: If you want it to fill but maintain aspect ratio */
+.page-transition img {
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}
+
+/* Prevent scrolling during transition */
+body.transitioning {
+    overflow: hidden;
+}
