@@ -9,635 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel='stylesheet' href='styles.css'>
-<style>
-    /* Pure CSS Account Dropdown - No JavaScript */
-.account-dropdown-btn {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    user-select: none;
-}
 
-.account-dropdown-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-/* Hidden checkbox to control dropdown */
-.account-dropdown-checkbox {
-    display: none;
-}
-
-/* Account Dropdown Content */
-.account-dropdown-content {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 10px;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(20px);
-    min-width: 220px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    z-index: 1000;
-    padding: 10px 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Show dropdown when checkbox is checked */
-.account-dropdown-checkbox:checked ~ .account-dropdown-content {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-/* Dropdown links */
-.account-dropdown-content a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 20px;
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.9);
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    border-left: 3px solid transparent;
-}
-
-.account-dropdown-content a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border-left-color: #9b4dff;
-    padding-left: 24px;
-}
-
-.option-icon {
-    font-size: 16px;
-    width: 24px;
-    text-align: center;
-}
-
-.account-dropdown-content .sign-out-option {
-    color: #ff6b6b;
-}
-
-.account-dropdown-content .sign-out-option:hover {
-    background: rgba(255, 107, 107, 0.1);
-    border-left-color: #ff6b6b;
-}
-
-.dropdown-divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 8px 0;
-}
-
-/* Make the entire user-menu relative for positioning */
-.user-menu {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.hero-section {
-    display: flex;
-    gap: 32px;
-    align-items: flex-start;
-    padding: 40px 48px;
-    position: relative;
-    min-height: 400px;
-    z-index: -1;
-  
-}
-
-.hero-left {
-    flex-shrink: 0;
-    width: 380px;
-    margin-left: -40px;
-    margin-bottom: auto;
-    
-    
-
-}
-
-.hero-image {
-    width:100%;
-    border-radius: 16px;
-    position: relative;
-    left: -120px;
-    margin-right: -100px;
-    box-shadow: 20px 20px 40px rgba(0,0,0,0.3);
-    overflow: hidden; 
-    z-index: -1;
-}
-
-.hero-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 16px;
-    display: block; 
-    object-position: center 20%;
-    transform: translateY(-10%);
-    
-}
-
-
-.hero-cards {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-
-}
-
-.book-card {
-    background: var(--glass);
-    backdrop-filter: blur(14px);
-    border-radius: 6px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-}
-
-.book-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(107, 63, 179, 0.25);
-}
-
-.book-cover {
-    width: 100%;
-    aspect-ratio: 1/1;
-    background: linear-gradient(135deg, rgba(107, 63, 179, 0.2), rgba(90, 62, 168, 0.1));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    color: #666;
-    overflow: hidden;
-}
-
-.book-cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.book-info {
-    padding: 16px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.book-title {
-    font-family: "Literata", serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 6px;
-    line-height: 1.3;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-
-.book-author {
-    font-size: 13px;
-    color: #aaa;
-    margin-bottom: 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    line-clamp: 1;
-    -webkit-box-orient: vertical;
-}
-
-.books-container {
-    padding: 40px 48px;
-}
-
-.books-header {
-    margin-bottom: 40px;
-}
-
-.books-header h2 {
-    font-family: "Literata", serif;
-    font-size: 36px;
-    font-weight: 700;
-    background: var(--grad-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.books-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 24px;
-}
-
-.nav {
-    position: relative;
-    z-index: 1;
-}
-.nav-link {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.nav-link:hover {
-    color: inherit;
-}
-.main {
-    position: relative;
-    z-index: 0;    
-    padding-left: 20px; 
-}
-.page-transition {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-
-.page-transition.active {
-    display: flex;
-}
-
-.transition-gif {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-
-/* Large devices (desktops, 1024px and down) */
-@media (max-width: 1024px) {
-    .hero-section {
-        flex-direction: column;
-        gap: 30px;
-        padding: 30px 24px;
-        left: 0;
-        min-height: auto;
-        align-items: center;
-    }
-    
-    .hero-left {
-        width: 100%;
-        max-width: 500px;
-        margin-left: 0;
-        display: flex;
-        justify-content: center;
-    }
-    
-    .hero-image {
-        left: 0;
-        margin-right: 0;
-        width: 100%;
-        max-width: 400px;
-        box-shadow: 10px 10px 30px rgba(0,0,0,0.2);
-    }
-    
-    .hero-cards {
-        width: 100%;
-        max-width: 600px;
-    }
-    
-    .books-container {
-        padding: 30px 24px;
-    }
-}
-
-/* Medium devices (tablets, 768px and down) */
-@media (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
-    
-    .header {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-        padding: 20px;
-    }
-    
-    .user-menu {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .main {
-        padding: 15px;
-        padding-left: 15px;
-    }
-    
-    .nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-    
-    .btn {
-        min-width: 140px;
-        padding: 10px 15px;
-        font-size: 14px;
-    }
-    
-    .hero-section {
-        padding: 20px 15px;
-        gap: 25px;
-    }
-    
-    .hero-image {
-        transform: translateY(0);
-        box-shadow: 8px 8px 20px rgba(0,0,0,0.2);
-    }
-    
-    .hero-image img {
-        transform: translateY(0);
-    }
-    
-    .hero-cards {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .books-header h2 {
-        font-size: 28px;
-        text-align: center;
-    }
-    
-    .books-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 18px;
-    }
-    
-    .book-info {
-        padding: 12px;
-    }
-    
-    .book-title {
-        font-size: 14px;
-    }
-    
-    .book-author {
-        font-size: 12px;
-    }
-}
-
-/* Small devices (mobile, 576px and down) */
-@media (max-width: 576px) {
-    .header h1 {
-        font-size: 24px;
-    }
-    
-    .header p {
-        font-size: 14px;
-    }
-    
-    .hero-section {
-        padding: 15px;
-    }
-    
-    .hero-left {
-        order: 2; /* Move image below cards on mobile */
-    }
-    
-    .hero-cards {
-        order: 1; /* Move cards above image on mobile */
-    }
-    
-    .hero-image {
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-    }
-    
-    .hero-image img {
-        width: 100%;
-        height: auto;
-    }
-    
-    .books-container {
-        padding: 20px 15px;
-    }
-    
-    .books-header h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-    
-    .books-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    
-    .book-card {
-        border-radius: 12px;
-    }
-    
-    .book-cover {
-        aspect-ratio: 2/3; /* Better aspect ratio for mobile */
-    }
-    
-    .nav {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .btn {
-        width: 100%;
-        max-width: 280px;
-        justify-content: center;
-    }
-    
-    .dropdown-menu {
-        position: static;
-        width: 100%;
-        max-width: 280px;
-        margin-top: 5px;
-    }
-    
-    footer {
-        font-size: 12px;
-        padding: 15px;
-    }
-}
-
-/* Extra small devices (very small mobile, 375px and down) */
-@media (max-width: 375px) {
-    .hero-cards {
-        grid-template-columns: 1fr;
-        max-width: 250px;
-        margin: 0 auto;
-    }
-    
-    .books-grid {
-        grid-template-columns: 1fr;
-        max-width: 250px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .hero-image {
-        max-width: 250px;
-    }
-    
-    .book-title {
-        font-size: 13px;
-    }
-    
-    .book-cover {
-        aspect-ratio: 3/4;
-    }
-}
-
-/* Large desktops (1200px and up) */
-@media (min-width: 1200px) {
-    .hero-section {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    .books-container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    .books-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
-}
-
-/* Very large screens (1400px and up) */
-@media (min-width: 1400px) {
-    .hero-section {
-        max-width: 1400px;
-    }
-    
-    .books-container {
-        max-width: 1400px;
-    }
-    
-    .books-grid {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    }
-    
-    .hero-cards {
-        grid-template-columns: repeat(2, minmax(250px, 1fr));
-    }
-}
-
-/* For high resolution displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .hero-image img,
-    .book-cover img,
-    .user-menu img {
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
-    }
-}
-
-/* For dark mode preference */
-@media (prefers-color-scheme: dark) {
-    .book-card {
-        background: rgba(30, 30, 40, 0.7);
-        border-color: rgba(255, 255, 255, 0.05);
-    }
-}
-
-/* For reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-    .book-card,
-    .page-transition {
-        transition: none;
-    }
-    
-    .book-card:hover {
-        transform: none;
-    }
-}
-
-/* For touch devices */
-@media (hover: none) and (pointer: coarse) {
-    .book-card:hover {
-        transform: none;
-        box-shadow: 0 5px 15px rgba(107, 63, 179, 0.15);
-    }
-    
-    .btn {
-        padding: 12px 16px; /* Larger touch target */
-    }
-}
-
-/* Landscape orientation on mobile */
-@media (max-height: 500px) and (orientation: landscape) {
-    .hero-section {
-        min-height: 300px;
-    }
-    
-    .hero-image {
-        max-height: 200px;
-        width: auto;
-        max-width: 200px;
-    }
-    
-    .hero-image img {
-        height: 100%;
-        width: auto;
-    }
-    
-    .hero-cards {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-    
-    .books-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-    }
-}
-
-/* Fix for Safari mobile viewport height */
-@supports (-webkit-touch-callout: none) {
-    @media (max-width: 768px) {
-        .hero-section {
-            min-height: 70vh;
-        }
-    }
-}
-</style>
 </head>
 
 <body>
@@ -647,16 +19,38 @@
         <b><h1>Book Goblin</h1></b>
         <i><p>Your Personal Library Assistant</p></i>
     </div>
-    <div class="user-menu">
-        <img src="Img\avatar.png" alt="User Avatar">
-        <button>Sign Out</button>
+<div class="user-menu">
+    <img src="Img/avatar.png" alt="User Avatar">
+    <label for="account-dropdown-toggle" class="account-dropdown-btn">
+        Account ▼
+    </label>
+    <input type="checkbox" id="account-dropdown-toggle" class="account-dropdown-checkbox">
+    <div class="account-dropdown-content">
+        <a href="#" class="account-option">
+            <span class="option-icon">👑</span>
+            Switch to Admin
+        </a>
+        <a href="#" class="account-option">
+            <span class="option-icon">👤</span>
+            Your Profile
+        </a>
+        <a href="#" class="account-option">
+            <span class="option-icon">➕</span>
+            Add Account
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="sign-out-option">
+            <span class="option-icon">🚪</span>
+            Sign Out
+        </a>
     </div>
+</div>
 </header>
 
 <section class="main">
 
     <nav class="nav">
-        <a href="dashboard.html" class="btn hover-lift nav-link" aria-label="Dashboard">
+        <a href="getstarted.html" class="btn hover-lift" aria-label="Get Started">
             <span class="icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2 21s4-4 9-4 9 4 9 4" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -677,7 +71,16 @@
             <span>My Books</span>
         </a>
 
-        <a href="https://www.hpb.com/" class="btn secondary hover-lift nav-link" aria-label="Collect More Books">
+        <a href="discover.html" class="btn secondary hover-lift nav-link" aria-label="Discover">
+            <span class="icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2l2.09 6.26L20 11l-5 3.64L15.18 21 12 17.77 8.82 21 9 14.64 4 11l5.91-2.74L12 2z" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            <span>Discover</span>
+        </a>
+
+        <a href="https://www.hpb.com/" class="btn secondary hover-lift" aria-label="Collect More Books">
             <span class="icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -705,64 +108,119 @@
         </div>
     </nav>
 
+    <!-- EXACTLY like  dashboard hero-section -->
+   <!-- Updated hero-section to match dashboard structure -->
     <div class="hero-section">
+        <!-- Hero left with image -->
         <div class="hero-left">
             <div class="hero-image">
-                <img src="Img\Searching Goblin.png" alt="Searching Goblin">
+                <img src="Img\Searching Goblin.png" alt="Book Goblin Searching">
             </div>
         </div>
+        
+        <!-- Hero cards grid -->
         <div class="hero-cards">
-            <div class="book-card">
-                <div class="book-cover"> <img src="https://m.media-amazon.com/images/I/81wGzzxqHSL._SL1500_.jpg" alt="Red Rising"></div>
-                <div class="book-info">
-                    <h3 class="book-title">Red Rising</h3>
-                    <p class="book-author">Pierce Brown</p>
-                </div>
+            <!-- Hero card 1 - Modified to be a card instead of direct image -->
+            <div class="hero">
+                <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1597695864i/54493401.jpg" alt="Project Hail Mary">
             </div>
-            <div class="book-card">
-                <div class="book-cover"> <img src="https://m.media-amazon.com/images/I/7182EdD2iWL._SY522_.jpg" alt="Stranger In A Strange Land"></div>
-                <div class="book-info">
-                    <h3 class="book-title">Stranger In A Strange Land</h3>
-                    <p class="book-author">Robert Heinlein</p>
-                </div>
+            
+            <!-- Hero card 2 -->
+            <div class="hero">
+                <img src="https://m.media-amazon.com/images/I/71GHKo78YBL._SL1500_.jpg" alt="Gideon the Ninth">
             </div>
+            
+            <!-- Hero card 3 -->
+            <div class="hero">
+                <img src="https://m.media-amazon.com/images/I/91NXdVnMoGL._SL1500_.jpg" alt="The Priory of the Orange Tree">
+            </div>
+            
+            <!-- Hero card 4 -->
+            <div class="hero">
+                <img src="https://m.media-amazon.com/images/I/7182EdD2iWL._SY522_.jpg" alt="Stranger In A Strange Land">
             </div>
         </div>
     </div>
+        
+        <!-- This is the carousel container - same as dashboard -->
+        <!-- <div class="carousel-container">
+            <div class="carousel-header">
+                <h3>Recommended for You</h3>
+                <p>Based on your reading</p>
+            </div>
+            <div class="carousel">
+                <div class="book-slide active">
+                    <img src="https://m.media-amazon.com/images/I/81wGzzxqHSL._SL1500_.jpg" alt="Red Rising">
+                    <div class="book-info">
+                        <h4>Red Rising</h4>
+                        <p>Pierce Brown</p>
+                    </div>
+                </div>
+                <div class="book-slide">
+                    <img src="https://m.media-amazon.com/images/I/7182EdD2iWL._SY522_.jpg" alt="Stranger In A Strange Land">
+                    <div class="book-info">
+                        <h4>Stranger In A Strange Land</h4>
+                        <p>Robert Heinlein</p>
+                    </div>
+                </div>
+                <div class="book-slide">
+                    <img src="https://m.media-amazon.com/images/I/71agPjqADHL._SL1500_.jpg" alt="Dungeon Crawler Carl">
+                    <div class="book-info">
+                        <h4>Dungeon Crawler Carl</h4>
+                        <p>Matt Dinniman</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicators">
+                <span class="indicator active"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+            </div>
+        </div>
+    </div> -->
 
 </section>
 
+<!-- Books grid section - this is different from dashboard but that's OK -->
 <section class="books-container">
     <div class="books-header">
         <h2>More Books to Explore</h2>
     </div>
     <div class="books-grid">
         <div class="book-card">
-            <div class="book-cover"><img src="https://m.media-amazon.com/images/I/71agPjqADHL._SL1500_.jpg" alt="Dungeon Crawler Carl"></div>
-            <div class="book-info">
-                <h3 class="book-title">Dungeon Crawler Carl</h3>
-                <p class="book-author">Matt Dinniman</p>
+            <div class="book-cover">
+                <img src="https://m.media-amazon.com/images/I/71p5luifDjL._SL1500_.jpg" alt="The Will Of The Many">
             </div>
-        </div>
-        <div class="book-card">
-            <div class="book-cover"><img src="https://m.media-amazon.com/images/I/71p5luifDjL._SL1500_.jpg" alt="The Will Of The Many"></div>
             <div class="book-info">
                 <h3 class="book-title">The Will Of The Many</h3>
                 <p class="book-author">James Islington</p>
             </div>
         </div>
         <div class="book-card">
-            <div class="book-cover"><img src="https://m.media-amazon.com/images/I/815EJibD9DL._SY466_.jpg" alt="The Shadow of the Gods"></div>
+            <div class="book-cover">
+                <img src="https://m.media-amazon.com/images/I/815EJibD9DL._SY466_.jpg" alt="The Shadow of the Gods">
+            </div>
             <div class="book-info">
                 <h3 class="book-title">The Shadow of the Gods</h3>
                 <p class="book-author">John Gwynne</p>
             </div>
         </div>
         <div class="book-card">
-            <div class="book-cover"><img src="https://m.media-amazon.com/images/I/91U6rc7u0yL._SL1500_.jpg" alt="Mistborn"></div>
+            <div class="book-cover">
+                <img src="https://m.media-amazon.com/images/I/91U6rc7u0yL._SL1500_.jpg" alt="Mistborn">
+            </div>
             <div class="book-info">
                 <h3 class="book-title">Mistborn</h3>
                 <p class="book-author">Brandon Sanderson</p>
+            </div>
+        </div>
+        <div class="book-card">
+            <div class="book-cover">
+                <img src="https://m.media-amazon.com/images/I/71agPjqADHL._SL1500_.jpg" alt="Dungeon Crawler Carl">
+            </div>
+            <div class="book-info">
+                <h3 class="book-title">Dungeon Crawler Carl</h3>
+                <p class="book-author">Matt Dinniman</p>
             </div>
         </div>
     </div>
@@ -771,11 +229,13 @@
 <footer>
     &copy; U197 Designs 2025
 </footer>
+
 <div class="page-transition" id="pageTransition">
-    <img src="Img\page_turning.gif" alt="Transition" class="transition-gif">
+    <img src="Img/page_turning.gif" alt="Transition" class="transition-gif">
 </div>
 
 <script>
+// Intersection Observer for animations
 (function(){
   const els = document.querySelectorAll('[data-animate]');
   if(!els.length) return;
@@ -790,7 +250,7 @@
   els.forEach(el => io.observe(el));
 })();
 
-
+// Dropdown menu functionality
 (function(){
   const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
   
@@ -837,10 +297,85 @@ document.querySelectorAll('.nav-link').forEach(link => {
     }, 600);
   });
 });
+
+// Carousel functionality
+(function() {
+    const slides = document.querySelectorAll('.book-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    
+    // Only run if carousel exists
+    if (slides.length === 0) return;
+    
+    let currentSlide = 0;
+    
+    function showSlide(index) {
+        // Hide all slides
+        slides.forEach(slide => slide.classList.remove('active'));
+        indicators.forEach(indicator => indicator.classList.remove('active'));
+        
+        // Show current slide
+        slides[index].classList.add('active');
+        indicators[index].classList.add('active');
+        
+        currentSlide = index;
+    }
+    
+    function nextSlide() {
+        let nextIndex = currentSlide + 1;
+        if (nextIndex >= slides.length) {
+            nextIndex = 0;
+        }
+        showSlide(nextIndex);
+    }
+    
+    // Auto-cycle every 4 seconds
+    let carouselInterval = setInterval(nextSlide, 4000);
+    
+    // Pause on hover
+    const carousel = document.querySelector('.carousel');
+    if (carousel) {
+        carousel.addEventListener('mouseenter', () => {
+            clearInterval(carouselInterval);
+        });
+        
+        carousel.addEventListener('mouseleave', () => {
+            carouselInterval = setInterval(nextSlide, 4000);
+        });
+        
+        // Click indicators to go to specific slide
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+    }
+})();
+
+// Image loading animation - same as dashboard
+window.addEventListener('load', function() {
+    // Add loaded class to hero image for gentle float animation
+    const heroImage = document.querySelector('.hero img');
+    if (heroImage) {
+        heroImage.classList.add('loaded');
+    }
+    
+    // Add loaded class to carousel images
+    const carouselImages = document.querySelectorAll('.book-slide img');
+    carouselImages.forEach((img, index) => {
+        setTimeout(() => {
+            img.classList.add('loaded');
+        }, index * 100);
+    });
+    
+    // Add loaded class to book cover images
+    const bookCoverImages = document.querySelectorAll('.book-cover img');
+    bookCoverImages.forEach((img, index) => {
+        setTimeout(() => {
+            img.classList.add('loaded');
+        }, index * 100 + 300);
+    });
+});
 </script>
 
 </body>
-
 </html>
-
-<!DOCTYPE html>
