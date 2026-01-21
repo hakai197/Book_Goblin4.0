@@ -15,21 +15,157 @@
     <link rel="stylesheet" href="styles.css">
     
     <style>
+        /* Tight layout with no extra space */
+        body {
+            min-height: 30vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
         .home-hero {
-            min-height: 100vh;
-            background: linear-gradient(rgba(5, 5, 5, 0.9), rgba(5, 5, 5, 0.7)), 
-                        url('Img/BookGoblinMess.png') center/cover no-repeat;
+            
+            display: flex;
+            align-items: center;
+            padding: 0;
+            background: linear-gradient(rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.7)), 
+                        url('Img/avatar.png') center/cover no-repeat;
+            background-size: 20% auto;
+            background-position: center center;
+        }
+        
+        .hero-image {
+            display: none;
         }
         
         .feature-icon {
-            width: 60px;
-            height: 60px;
+            width: 45px;
+            height: 45px;
             background: var(--grad-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Tight main container */
+        main {
+            flex: 1;
+        }
+        
+        /* Compact text */
+        .display-4 {
+            font-size: calc(2rem + 1.5vw);
+            margin-bottom: 0.5rem !important;
+            line-height: 1.2;
+        }
+        
+        .lead {
+            font-size: 1rem;
+            margin-bottom: 1rem !important;
+            line-height: 1.3;
+        }
+        
+        /* Very compact cards */
+        .card-glass {
+            padding: 1.25rem 1rem !important;
+            margin-bottom: 0;
+        }
+        
+        /* Tight spacing - remove all extra padding */
+        section {
+            padding: 1rem 0 !important;
+            margin: 0;
+        }
+        
+        /* Very compact footer */
+        footer {
+            margin-top: 0.5rem;
+            padding: 0.75rem 0 !important;
+        }
+        
+        /* Compact header */
+        header {
+            padding: 0.4rem 0 !important;
+        }
+        
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .home-hero {
+                height: 60vh;
+                background-size: 70% auto;
+            }
+            
+            .display-4 {
+                font-size: 1.8rem;
+            }
+            
+            .lead {
+                font-size: 0.95rem;
+            }
+            
+            /* Stack features vertically with minimal gap */
+            .col-md-6 {
+                margin-bottom: 0.5rem;
+            }
+            
+            .card-glass {
+                padding: 1rem 0.75rem !important;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .home-hero {
+                height: 65vh;
+                background-size: 45% auto;
+            }
+        }
+        
+        /* Compact buttons */
+        .btn-group-custom {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.4rem 1rem !important;
+            font-size: 0.85rem !important;
+        }
+        
+        /* Features section - tight layout */
+        #features {
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+        }
+        
+        /* Remove any default margins */
+        h1, h2, h3, h4, h5, h6, p {
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .mb-3 {
+            margin-bottom: 0.75rem !important;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1rem !important;
+        }
+        
+        /* Ensure container has minimal padding */
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        
+        /* Features grid with minimal gaps */
+        .row.g-2 {
+            --bs-gutter-y: 0.5rem;
+            --bs-gutter-x: 0.5rem;
         }
     </style>
 </head>
@@ -41,20 +177,20 @@
     </div>
 
     <!-- Header -->
-    <header class="header sticky-top py-3 px-4 bg-dark-glass border-bottom border-glass">
+    <header class="header sticky-top py-1 px-2 bg-dark-glass border-bottom border-glass">
         <div class="container d-flex justify-content-between align-items-center">
             <div>
-                <h1 class="h2 mb-1 text-gradient">Book Goblin</h1>
-                <p class="text small">Your Personal Library Assistant</p>
+                <h1 class="h5 mb-0 text-gradient">Book Goblin</h1>
+                <p class="text small mb-0">Your Personal Library Assistant</p>
             </div>
             
             <div class="d-none d-md-block">
-                <a href="login.html" class="btn btn-outline-light me-2">Login</a>
-                <a href="register.html" class="btn btn-gradient">Register</a>
+                <a href="login.html" class="btn btn-outline-light btn-sm me-2">Login</a>
+                <a href="register.html" class="btn btn-gradient btn-sm">Register</a>
             </div>
             
             <!-- Mobile Menu Toggle -->
-            <button class="btn btn-gradient d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
+            <button class="btn btn-gradient btn-sm d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
                 <i class="bi bi-list"></i>
             </button>
         </div>
@@ -62,12 +198,10 @@
 
     <!-- Mobile Menu -->
     <div class="collapse d-md-none" id="mobileMenu">
-        <div class="bg-dark-glass p-3">
-            <div class="d-flex flex-column gap-2">
-                <a href="login.html" class="btn btn-outline-light">Login</a>
-                <a href="register.html" class="btn btn-gradient">Register</a>
-                <a href="about.html" class="btn btn-outline-light">About</a>
-                <a href="features.html" class="btn btn-outline-light">Features</a>
+        <div class="bg-dark-glass p-1">
+            <div class="d-flex flex-column gap-1">
+                <a href="login.html" class="btn btn-outline-light btn-sm">Login</a>
+                <a href="register.html" class="btn btn-gradient btn-sm">Register</a>
             </div>
         </div>
     </div>
@@ -75,24 +209,19 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="home-hero d-flex align-items-center">
+        <section class="home-hero">
             <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
-                        <h1 class="display-4 fw-bold mb-4 text-gradient">Track. Discover. Read.</h1>
-                        <p class="lead mb-4">Your personal library assistant that helps you organize, discover, and track your reading journey.</p>
-                        <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
-                            <a href="register.html" class="btn btn-gradient btn-lg px-4">
-                                <i class="bi bi-rocket-takeoff me-2"></i>Get Started
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-12 text-center">
+                        <h1 class="display-4 fw-bold mb-1 text-gradient">Track. Discover. Read.</h1>
+                        <p class="lead mb-2">Your personal library assistant that helps you organize, discover, and track your reading journey.</p>
+                        <div class="btn-group-custom">
+                            <a href="register.html" class="btn btn-gradient">
+                                <i class="bi bi-rocket-takeoff me-1"></i>Get Started
                             </a>
-                            <a href="login.html" class="btn btn-outline-light btn-lg px-4">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                            <a href="login.html" class="btn btn-outline-light">
+                                <i class="bi bi-box-arrow-in-right me-1"></i>Login
                             </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="hero-image">
-                            <img src="Img/BookGoblinMess.png" alt="Book Goblin" class="img-fluid rounded-4 shadow-lg">
                         </div>
                     </div>
                 </div>
@@ -100,51 +229,51 @@
         </section>
 
         <!-- Features Section -->
-        <section class="py-5">
+        <section id="features" class="py-1">
             <div class="container">
-                <div class="text-center mb-5">
-                    <h2 class="h1 text-gradient mb-3">Why Choose Book Goblin?</h2>
-                    <p class="lead text-muted">Everything you need to manage your reading journey</p>
+                <div class="text-center mb-2">
+                    <h2 class="h3 text-gradient mb-1">Why Choose Book Goblin?</h2>
+                    <p class="text small mb-2">Everything you need to manage your reading journey</p>
                 </div>
                 
-                <div class="row g-4">
+                <div class="row g-2">
                     <div class="col-md-6 col-lg-3">
-                        <div class="card-glass h-100 p-4 text-center">
+                        <div class="card-glass h-100 p-2 text-center">
                             <div class="feature-icon mx-auto">
-                                <i class="bi bi-book fs-3"></i>
+                                <i class="bi bi-book fs-5"></i>
                             </div>
-                            <h4 class="mb-3">Track Reading</h4>
-                            <p class="text-muted">Easily track books you've read, are reading, or want to read.</p>
+                            <h5 class="mb-1">Track Reading</h5>
+                            <p class="text small mb-0">Easily track books you've read, are reading, or want to read.</p>
                         </div>
                     </div>
                     
                     <div class="col-md-6 col-lg-3">
-                        <div class="card-glass h-100 p-4 text-center">
+                        <div class="card-glass h-100 p-2 text-center">
                             <div class="feature-icon mx-auto">
-                                <i class="bi bi-stars fs-3"></i>
+                                <i class="bi bi-stars fs-5"></i>
                             </div>
-                            <h4 class="mb-3">Smart Discovery</h4>
-                            <p class="text-muted">Get personalized recommendations based on your taste.</p>
+                            <h5 class="mb-1">Smart Discovery</h5>
+                            <p class="text small mb-0">Get personalized recommendations based on your taste.</p>
                         </div>
                     </div>
                     
                     <div class="col-md-6 col-lg-3">
-                        <div class="card-glass h-100 p-4 text-center">
+                        <div class="card-glass h-100 p-2 text-center">
                             <div class="feature-icon mx-auto">
-                                <i class="bi bi-graph-up fs-3"></i>
+                                <i class="bi bi-graph-up fs-5"></i>
                             </div>
-                            <h4 class="mb-3">Reading Stats</h4>
-                            <p class="text-muted">Visualize your reading habits with detailed statistics.</p>
+                            <h5 class="mb-1">Reading Stats</h5>
+                            <p class="text small mb-0">Visualize your reading habits with detailed statistics.</p>
                         </div>
                     </div>
                     
                     <div class="col-md-6 col-lg-3">
-                        <div class="card-glass h-100 p-4 text-center">
+                        <div class="card-glass h-100 p-2 text-center">
                             <div class="feature-icon mx-auto">
-                                <i class="bi bi-flag fs-3"></i>
+                                <i class="bi bi-flag fs-5"></i>
                             </div>
-                            <h4 class="mb-3">Set Goals</h4>
-                            <p class="text-muted">Set and track reading goals to stay motivated.</p>
+                            <h5 class="mb-1">Set Goals</h5>
+                            <p class="text small mb-0">Set and track reading goals to stay motivated.</p>
                         </div>
                     </div>
                 </div>
@@ -153,16 +282,16 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-4 bg-dark-glass border-top border-glass">
+    <footer class="py-1 bg-dark-glass border-top border-glass">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6 mb-3 mb-md-0">
-                    <p class="mb-0 text-muted">&copy; 2025 Book Goblin. All rights reserved.</p>
+                <div class="col-md-6 mb-0">
+                    <p class="mb-0 text small">&copy; 2025 U197 Designs Book Goblin. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <a href="#" class="text-muted text-decoration-none me-3">Privacy Policy</a>
-                    <a href="#" class="text-muted text-decoration-none me-3">Terms of Service</a>
-                    <a href="#" class="text-muted text-decoration-none">Contact Us</a>
+                    <a href="#" class="text text-decoration-none me-2 small">Privacy</a>
+                    <a href="#" class="text text-decoration-none me-2 small">Terms</a>
+                    <a href="#" class="text text-decoration-none small">Contact</a>
                 </div>
             </div>
         </div>
