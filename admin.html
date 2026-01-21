@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard - Book Goblin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel='stylesheet' href='styles.css'>
+
+<style>
+    /* Admin-specific styles - Black text for content */
+    body {
+        color: #ffffff;
+    }
+    
+    .admin-dashboard {
+        padding: 2rem 0;
+        color: #ffffff;
+    }
+    
+    /* Top Navigation Styles */
+    .top-admin-nav {
+        background: white;
+        border-bottom: 1px solid #e9ecef;
+        padding: 0.75rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .top-nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    .admin-nav-links {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .admin-nav-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.625rem 1rem;
+        background: transparent;
+        border: none;
+        border-radius: 8px;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+    
+    .admin-nav-btn:hover {
+        background-color: #f8f9fa;
+        color: #000000;
+    }
+    
+    .admin-nav-btn.active {
+        background-color: #4361ee;
+        color: white !important;
+    }
+    
+    .admin-nav-btn.active:hover {
+        background-color: #3a56d4;
+        color: white !important;
+    }
+    
+    .admin-nav-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .admin-nav-divider {
+        width: 1px;
+        height: 24px;
+        background-color: #e9ecef;
+        margin: 0 0.5rem;
+    }
+    
+    /* Dropdown menus - Keep Bootstrap default styling for dropdown items */
+    .admin-nav-dropdown .dropdown-menu,
+    .user-menu .dropdown-menu {
+        /* Don't override dropdown text color here */
+    }
+    
+    /* Stats Cards */
+    .stats-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .stat-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        border-left: 4px solid #4361ee;
+        transition: transform 0.2s ease;
+        color: #000000;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-4px);
+    }
+    
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #4361ee;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+        color: #495057;
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+    
+    .stat-change {
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+        color: #000000;
+    }
+    
+    .stat-change.positive {
+        color: #10b981;
+    }
+    
+    .stat-change.negative {
+        color: #ef4444;
+    }
+    
+    /* Admin Sections */
+    .admin-section {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        color: #000000;
+    }
+    
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #f8f9fa;
+        color: #000000;
+    }
+    
+    .section-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #000000;
+        margin: 0;
+    }
+    
+    .view-all-btn {
+        color: #4361ee;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+    
+    .view-all-btn:hover {
+        text-decoration: underline;
+        color: #3a56d4;
+    }
+    
+    /* Flag and User Items */
+    .flag-item, .user-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid #f8f9fa;
+        transition: background-color 0.2s ease;
+        color: #000000;
+    }
+    
+    .flag-item:hover, .user-item:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .flag-icon, .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+    
+    .flag-icon {
+        background-color: #fee2e2;
+        color: #dc2626;
+    }
+    
+    .flag-info, .user-info {
+        flex-grow: 1;
+        color: #000000;
+    }
+    
+    .flag-title, .user-name {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: #000000;
+    }
+    
+    .flag-meta, .user-meta {
+        font-size: 0.85rem;
+        color: #495057;
+    }
+    
+    .action-btns {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .btn-sm {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.85rem;
+        border-radius: 6px;
+    }
+    
+    .btn-approve {
+        background-color: #10b981;
+        border-color: #10b981;
+        color: white;
+    }
+    
+    .btn-deny {
+        background-color: #ef4444;
+        border-color: #ef4444;
+        color: white;
+    }
+    
+    .user-avatar {
+        background-color: #e0e7ff;
+        color: #4361ee;
+        font-weight: 600;
+    }
+    
+    /* Activity Log */
+    .activity-log {
+        max-height: 300px;
+        overflow-y: auto;
+        color: #000000;
+    }
+    
+    .activity-item {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f8f9fa;
+        font-size: 0.9rem;
+        color: #000000;
+    }
+    
+    .activity-item strong {
+        color: #000000;
+    }
+    
+    .activity-time {
+        color: #6c757d;
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+    }
+    
+    /* Quick Actions */
+    .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    .quick-action-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem;
+        background: white;
+        border: 1px solid #f8f9fa;
+        border-radius: 8px;
+        color: #000000;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+    
+    .quick-action-btn:hover {
+        background-color: #4361ee;
+        color: white;
+        border-color: #4361ee;
+        transform: translateY(-2px);
+    }
+    
+    .quick-action-icon {
+        font-size: 1.25rem;
+    }
+    
+    /* Main Content Adjustments */
+    .main-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* FIX: User Menu Container */
+    .user-menu-container {
+        position: relative;
+        z-index: 9999 !important;
+        display: inline-block;
+    }
+    
+    /* Force dropdown to display above everything */
+    .user-dropdown {
+        position: absolute !important;
+        top: 100% !important;
+        right: 0 !important;
+        left: auto !important;
+        transform: none !important;
+        will-change: transform;
+        background: white !important;
+        border: 2px solid #4361ee !important;
+        border-radius: 12px !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+        padding: 0.5rem;
+        min-width: 280px !important;
+        margin-top: 10px !important;
+        z-index: 10000 !important;
+        overflow: visible !important;
+    }
+    
+    /* Prevent Bootstrap from overriding position */
+    .dropdown-menu.show {
+        display: block !important;
+        position: absolute !important;
+        inset: auto !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+    
+    /* Button styling */
+    .user-menu-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: white !important;
+        border: 2px solid #e9ecef !important;
+        border-radius: 12px !important;
+        padding: 0.5rem 1rem !important;
+        color: #000000 !important;
+        font-weight: 500;
+        transition: all 0.3s ease !important;
+        min-width: 200px;
+        position: relative;
+        z-index: 9998;
+    }
+    
+    .user-menu-btn:hover {
+        border-color: #4361ee !important;
+        background: #f8f9fa !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(67, 97, 238, 0.1);
+    }
+    
+    .user-menu-btn:active,
+    .user-menu-btn.show {
+        border-color: #4361ee !important;
+        background: white !important;
+    }
+    
+    /* Avatar styling */
+    .user-avatar {
+        position: relative;
+        width: 36px;
+        height: 36px;
+    }
+    
+    .user-avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #4361ee;
+    }
+    
+    .online-status {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 10px;
+        height: 10px;
+        background: #10b981;
+        border: 2px solid white;
+        border-radius: 50%;
+    }
+    
+    /* User info */
+    .user-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex-grow: 1;
+    }
+    
+    .user-name {
+        font-weight: 600;
+        color: #000000;
+        font-size: 0.95rem;
+    }
+    
+    .user-role {
+        font-size: 0.75rem;
+        color: #4361ee;
+        background: #e0e7ff;
+        padding: 0.1rem 0.5rem;
+        border-radius: 12px;
+        margin-top: 0.1rem;
+    }
+    
+    /* Dropdown items */
+    .user-dropdown .dropdown-item {
+        padding: 0.75rem 1rem !important;
+        border-radius: 8px !important;
+        margin: 0.15rem 0;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        color: #212529 !important;
+        transition: all 0.2s ease;
+    }
+    
+    .user-dropdown .dropdown-item:hover {
+        background-color: #f8f9fa !important;
+        transform: translateX(5px);
+        color: #4361ee !important;
+    }
+    
+    .dropdown-icon {
+        font-size: 1.25rem;
+        width: 24px;
+        display: inline-block;
+    }
+    
+    .user-dropdown .dropdown-item div {
+        flex-grow: 1;
+    }
+    
+    .user-dropdown .dropdown-item small {
+        font-size: 0.8rem;
+        opacity: 0.8;
+        display: block;
+        margin-top: 0.1rem;
+    }
+    
+    .user-dropdown .dropdown-divider {
+        margin: 0.5rem 0;
+        border-color: #e9ecef;
+    }
+    
+    .dropdown-footer {
+        padding: 0.75rem 1rem;
+    }
+    
+    .session-info {
+        font-size: 0.8rem;
+        color: #6c757d;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .user-dropdown .text-danger {
+        color: #dc3545 !important;
+    }
+    
+    .user-dropdown .text-danger:hover {
+        background-color: #fff5f5 !important;
+        color: #dc3545 !important;
+    }
+    
+    .user-dropdown .text-danger small {
+        color: #dc3545 !important;
+    }
+    
+    /* Important: Fix header overflow */
+    .header {
+        position: relative !important;
+        overflow: visible !important;
+        z-index: 100;
+    }
+    
+    /* Fix any parent containers that might clip the dropdown */
+    .main-layout, 
+    .container-fluid, 
+    .row, 
+    .col, 
+    .main-content {
+        overflow: visible !important;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+        .top-nav-container {
+            padding: 0 1rem;
+        }
+        
+        .admin-nav-links {
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+        
+        .main-content {
+            padding: 0 1rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .stats-cards {
+            grid-template-columns: 1fr;
+        }
+        
+        .action-btns {
+            flex-direction: column;
+        }
+        
+        .quick-actions {
+            grid-template-columns: 1fr;
+        }
+        
+        .flag-item, .user-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .action-btns {
+            align-self: flex-end;
+        }
+    }
+    
+    /* Dark text overrides for main content only */
+    h1, h2, h3, h4, h5, h6 {
+        color: #000000 !important;
+    }
+    
+    p, span, div, .text-muted {
+        color: #000000 !important;
+    }
+    
+    .text-secondary {
+        color: #495057 !important;
+    }
+    
+    .text-muted {
+        color: #6c757d !important;
+    }
+    
+    /* Explicitly ensure dropdown items keep Bootstrap styling */
+    .dropdown-item {
+        /* Let Bootstrap handle these */
+    }
+    
+    /* Header user menu - keep original styling */
+    .user-menu button {
+        color: #000000 !important;
+    }
+    
+    .user-menu button:hover {
+        color: #000000 !important;
+    }
+</style>
+</head>
+
+<body>
+
+
+<header class="header" style="position: relative; z-index: 1000;">
+    <div>
+        <h1 style="color: #000000;">Book Goblin</h1>
+        <p style="color: #000000;">Admin Dashboard</p>
+    </div>
+    
+    <!-- User Menu - Moved to highest z-index level -->
+    <div class="user-menu-container" style="position: relative; z-index: 2000;">
+        <button class="dropdown-toggle user-menu-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static" data-bs-offset="10,20">
+            <div class="user-avatar">
+                <img src="Img/avatar.png" alt="User Avatar">
+                <span class="online-status"></span>
+            </div>
+            <div class="user-info">
+                <span class="user-name">Admin User</span>
+                <span class="user-role">Administrator</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <ul class="dropdown-menu user-dropdown" style="z-index: 99999 !important;">
+            <li>
+                <a class="dropdown-item" href="#">
+                    <span class="dropdown-icon">👑</span>
+                    <div>
+                        <div>Switch to User Mode</div>
+                        <small class="text-muted">View as regular user</small>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#">
+                    <span class="dropdown-icon">👤</span>
+                    <div>
+                        <div>Your Profile</div>
+                        <small class="text-muted">Edit account settings</small>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#">
+                    <span class="dropdown-icon">➕</span>
+                    <div>
+                        <div>Add Account</div>
+                        <small class="text-muted">Create new admin user</small>
+                    </div>
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li class="dropdown-footer">
+                <div class="session-info">
+                    <small>Session: 2h 15m</small>
+                    <small>Last login: Today 08:30</small>
+                </div>
+            </li>
+            <li>
+                <a class="dropdown-item text-danger" href="#">
+                    <span class="dropdown-icon">🚪</span>
+                    <div>
+                        <div>Sign Out</div>
+                        <small class="text-danger">End current session</small>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<!-- Top Admin Navigation - Lower z-index -->
+<nav class="top-admin-nav" style="position: relative; z-index: 500;">
+    <div class="top-nav-container">
+        <div class="admin-nav-links">
+            <a href="admin-dashboard.html" class="admin-nav-btn active">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.2"/>
+                </svg>
+                Dashboard
+            </a>
+            
+            <a href="admin-users.html" class="admin-nav-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke="currentColor" stroke-width="1.2"/>
+                </svg>
+                User Management
+            </a>
+            
+            <a href="admin-content.html" class="admin-nav-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 6h14v12H3z" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M7 6v12" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M20 9l-3 3 3 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+                Content Flags
+            </a>
+            
+            <a href="admin-books.html" class="admin-nav-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 19.5A2.5 2.5 0 016.5 17H20" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" stroke="currentColor" stroke-width="1.2"/>
+                </svg>
+                Book Database
+            </a>
+            
+            <div class="admin-nav-divider"></div>
+            
+            <div class="dropdown admin-nav-dropdown" style="z-index: 600;">
+                <button class="admin-nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2v9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                        <path d="M16 4l-4-2-4 2" stroke="currentColor" stroke-width="1.2"/>
+                        <path d="M2 21s4-4 9-4 9 4 9 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    More Tools
+                </button>
+                <ul class="dropdown-menu" style="z-index: 601;">
+                    <li><a class="dropdown-item" href="admin-analytics.html">Analytics</a></li>
+                    <li><a class="dropdown-item" href="admin-system.html">System Settings</a></li>
+                    <li><a class="dropdown-item" href="admin-lists.html">Curated Lists</a></li>
+                    <li><a class="dropdown-item" href="admin-privacy.html">Data Privacy</a></li>
+                    <li><a class="dropdown-item" href="admin-support.html">Support Access</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="admin-nav-status">
+            <span class="badge bg-primary">System: Online</span>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content Area -->
+<div class="main-content admin-dashboard">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Admin Dashboard</h2>
+        <div class="text-end">
+            <span class="badge bg-light text-dark">Last updated: Today, 10:30 AM</span>
+        </div>
+    </div>
+    
+    <!-- Stats Cards -->
+    <div class="stats-cards">
+        <div class="stat-card">
+            <div class="stat-value">12,847</div>
+            <div class="stat-label">Total Users</div>
+            <div class="stat-change positive">↑ 234 this week</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Pending Flags</div>
+            <div class="stat-change negative">↑ 3 since yesterday</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">42</div>
+            <div class="stat-label">Book Submissions</div>
+            <div class="stat-change positive">↑ 12 pending</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">96.7%</div>
+            <div class="stat-label">System Uptime</div>
+            <div class="stat-change positive">All systems normal</div>
+        </div>
+    </div>
+    
+    <!-- Pending Content Flags Section -->
+    <div class="admin-section">
+        <div class="section-header">
+            <h3 class="section-title">⚠️ Pending Content Flags</h3>
+            <a href="admin-content.html" class="view-all-btn">View All →</a>
+        </div>
+        
+        <div class="flags-list">
+            <div class="flag-item">
+                <div class="flag-icon">🗣️</div>
+                <div class="flag-info">
+                    <div class="flag-title">Inappropriate Review</div>
+                    <div class="flag-meta">Reported by: user_jane • Book: "Midnight Sun" • 2 hours ago</div>
+                </div>
+                <div class="action-btns">
+                    <button class="btn btn-sm btn-approve">Approve</button>
+                    <button class="btn btn-sm btn-deny">Remove</button>
+                    <button class="btn btn-sm btn-outline-secondary">View</button>
+                </div>
+            </div>
+            
+            <div class="flag-item">
+                <div class="flag-icon">🚫</div>
+                <div class="flag-info">
+                    <div class="flag-title">Spam Account Activity</div>
+                    <div class="flag-meta">User: book_bot_2024 • 12 fake reviews detected • 5 hours ago</div>
+                </div>
+                <div class="action-btns">
+                    <button class="btn btn-sm btn-deny">Ban User</button>
+                    <button class="btn btn-sm btn-outline-secondary">Investigate</button>
+                </div>
+            </div>
+            
+            <div class="flag-item">
+                <div class="flag-icon">📚</div>
+                <div class="flag-info">
+                    <div class="flag-title">Duplicate Book Entry</div>
+                    <div class="flag-meta">"The Silent Patient" has 3 duplicates • Reported by admin • Yesterday</div>
+                </div>
+                <div class="action-btns">
+                    <button class="btn btn-sm btn-approve">Merge</button>
+                    <button class="btn btn-sm btn-outline-secondary">Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Activity & Quick Actions -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="admin-section">
+                <div class="section-header">
+                    <h3 class="section-title">📋 Recent Admin Activity</h3>
+                </div>
+                <div class="activity-log">
+                    <div class="activity-item">
+                        <strong>@admin_you</strong> approved user submission for "Project Hail Mary"
+                        <div class="activity-time">10:15 AM • Just now</div>
+                    </div>
+                    <div class="activity-item">
+                        <strong>@mod_john</strong> resolved a content flag on review ID #8923
+                        <div class="activity-time">9:45 AM • 30 minutes ago</div>
+                    </div>
+                    <div class="activity-item">
+                        <strong>System</strong> added 42 new users from referral program
+                        <div class="activity-time">Yesterday • 4:30 PM</div>
+                    </div>
+                    <div class="activity-item">
+                        <strong>@admin_you</strong> updated genre "Science Fiction" to include 12 new sub-genres
+                        <div class="activity-time">Yesterday • 2:15 PM</div>
+                    </div>
+                    <div class="activity-item">
+                        <strong>@mod_sarah</strong> featured "Klara and the Sun" on homepage
+                        <div class="activity-time">2 days ago • 11:20 AM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="admin-section">
+                <div class="section-header">
+                    <h3 class="section-title">⚡ Quick Actions</h3>
+                </div>
+                <div class="quick-actions">
+                    <a href="admin-users.html?action=new" class="quick-action-btn">
+                        <span class="quick-action-icon">👤</span>
+                        <span>Add New User</span>
+                    </a>
+                    <a href="admin-books.html?action=add" class="quick-action-btn">
+                        <span class="quick-action-icon">📖</span>
+                        <span>Add Book Manually</span>
+                    </a>
+                    <a href="admin-analytics.html" class="quick-action-btn">
+                        <span class="quick-action-icon">📊</span>
+                        <span>Generate Report</span>
+                    </a>
+                    <a href="admin-system.html" class="quick-action-btn">
+                        <span class="quick-action-icon">⚙️</span>
+                        <span>System Settings</span>
+                    </a>
+                    <a href="admin-lists.html?action=new" class="quick-action-btn">
+                        <span class="quick-action-icon">🏆</span>
+                        <span>Create Reading Challenge</span>
+                    </a>
+                    <a href="#" class="quick-action-btn" data-bs-toggle="modal" data-bs-target="#broadcastModal">
+                        <span class="quick-action-icon">📢</span>
+                        <span>Send Announcement</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New User Registrations -->
+    <div class="admin-section">
+        <div class="section-header">
+            <h3 class="section-title">👥 Recent User Registrations</h3>
+            <a href="admin-users.html" class="view-all-btn">Manage All Users →</a>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="user-item">
+                    <div class="user-avatar">JD</div>
+                    <div class="user-info">
+                        <div class="user-name">Jane Doe</div>
+                        <div class="user-meta">@bookworm_jane • Joined: Today • 5 books added</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary">View Profile</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="user-item">
+                    <div class="user-avatar">RS</div>
+                    <div class="user-info">
+                        <div class="user-name">Robert Smith</div>
+                        <div class="user-meta">@robert_reads • Joined: Yesterday • 12 books added</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary">View Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Broadcast Modal -->
+<div class="modal fade" id="broadcastModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">📢 Send Announcement</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Announcement Title</label>
+                    <input type="text" class="form-control" placeholder="E.g., New Reading Challenge!">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-control" rows="4" placeholder="Type your announcement here..."></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Target Audience</label>
+                    <select class="form-select">
+                        <option>All Users</option>
+                        <option>New Users (joined this month)</option>
+                        <option>Active Readers (5+ books)</option>
+                        <option>Inactive Users (no login in 30 days)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Send Announcement</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-transition" id="pageTransition">
+    <img src="Img/page_turning.gif" alt="Page Turning Transition">
+</div>
+
+<footer style="color: #000000;">
+    &copy; U197 Designs 2025 | Admin Dashboard v2.1
+</footer>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const transition = document.getElementById('pageTransition');
+        
+        setTimeout(() => {
+            transition.classList.remove('active');
+        }, 100);
+        
+        // Set text to black only for main content, not dropdowns
+        const elementsToColorBlack = [
+            'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+            '.admin-section', '.stat-card', '.flag-title',
+            '.user-name', '.flag-meta', '.user-meta',
+            '.section-title', '.activity-item',
+            '.quick-action-btn:not(:hover)', '.view-all-btn',
+            '.admin-nav-btn:not(.active)', '.badge.bg-light',
+            '.stat-label', '.stat-change', 'footer'
+        ];
+        
+        elementsToColorBlack.forEach(selector => {
+            document.querySelectorAll(selector).forEach(el => {
+                el.style.color = '#000000';
+            });
+        });
+        
+        // Quick action buttons
+        document.querySelectorAll('.btn-approve').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const item = this.closest('.flag-item');
+                item.style.opacity = '0.5';
+                setTimeout(() => {
+                    item.remove();
+                    updatePendingCount();
+                }, 300);
+            });
+        });
+        
+        document.querySelectorAll('.btn-deny').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to remove this item?')) {
+                    const item = this.closest('.flag-item');
+                    item.style.opacity = '0.5';
+                    setTimeout(() => {
+                        item.remove();
+                        updatePendingCount();
+                    }, 300);
+                }
+            });
+        });
+        
+        function updatePendingCount() {
+            const pendingItems = document.querySelectorAll('.flag-item').length;
+            const countElement = document.querySelector('.stat-card:nth-child(2) .stat-value');
+            if (countElement) {
+                countElement.textContent = pendingItems;
+            }
+        }
+        
+        // Top navigation active state
+        document.querySelectorAll('.admin-nav-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (!this.classList.contains('dropdown-toggle')) {
+                    document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Ensure active button has white text
+                    this.style.color = 'white';
+                }
+            });
+        });
+        
+        // Reset active button text color on page load
+        document.querySelectorAll('.admin-nav-btn.active').forEach(btn => {
+            btn.style.color = 'white';
+        });
+        
+        // Navigation
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.classList.contains('dropdown-toggle')) return;
+                
+                if (this.href && 
+                    !this.href.includes('#') && 
+                    !this.hasAttribute('target') &&
+                    this.hostname === window.location.hostname &&
+                    !this.href.startsWith('mailto:') &&
+                    !this.href.startsWith('tel:') &&
+                    !this.href.startsWith('javascript:')) {
+                    
+                    e.preventDefault();
+                    const destination = this.href;
+                    
+                    transition.classList.add('active');
+                    document.body.classList.add('transitioning');
+                    
+                    setTimeout(() => {
+                        window.location.href = destination;
+                    }, 1500);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
