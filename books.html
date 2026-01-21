@@ -60,54 +60,50 @@
 
     <div class="d-flex">
         <!-- Sidebar -->
-        <nav class="nav-sidebar d-none d-lg-block">
-            <div class="d-flex flex-column gap-3 px-3">
-                <a href="dashboard.html" class="nav-btn text-decoration-none d-flex align-items-center gap-3">
-                    <i class="bi bi-house"></i>
-                    <span>Home</span>
-                </a>
+           <nav class="nav-sidebar d-none d-lg-block">
+    <div class="d-flex flex-column gap-3 px-3 py-3">
+        <a href="dashboard.html" class="nav-btn text-decoration-none d-flex align-items-center gap-3 p-3">
+            <i class="bi bi-house fs-5"></i>
+            <span class="fs-5">Home</span>
+        </a>
 
-                <a href="books.html" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3">
-                    <i class="bi bi-book"></i>
-                    <span>My Books</span>
-                </a>
+        <a href="books.html" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3 p-3">
+            <i class="bi bi-book fs-5"></i>
+            <span class="fs-5">My Books</span>
+        </a>
 
-                <a href="discover.html" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3">
-                    <i class="bi bi-compass"></i>
-                    <span>Discover</span>
-                </a>
+        <a href="discover.html" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3 p-3">
+            <i class="bi bi-compass fs-5"></i>
+            <span class="fs-5">Discover</span>
+        </a>
 
-                <a href="https://www.hpb.com/" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3" target="_blank">
-                    <i class="bi bi-cart-plus"></i>
-                    <span>Buy Books</span>
-                </a>
+        <a href="https://www.hpb.com/" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3 p-3" target="_blank">
+            <i class="bi bi-cart-plus fs-5"></i>
+            <span class="fs-5">Buy Books</span>
+        </a>
 
-                <div class="dropdown">
-                    <button class="nav-btn secondary dropdown-toggle w-100 d-flex align-items-center gap-3" type="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-list"></i>
-                        <span>Menu</span>
-                    </button>
-                    <ul class="dropdown-menu bg-dark border border-light">
-                        <li><a class="dropdown-item text-light" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
-                        <li><a class="dropdown-item text-light" href="#"><i class="bi bi-heart me-2"></i>Wishlist</a></li>
-                        <li><a class="dropdown-item text-light" href="#"><i class="bi bi-flag me-2"></i>Reading Goals</a></li>
-                        <li><a class="dropdown-item text-light" href="#"><i class="bi bi-star me-2"></i>Favorites</a></li>
-                        <li><a class="dropdown-item text-light" href="#"><i class="bi bi-question-circle me-2"></i>Help & Support</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <div class="dropdown">
+            <button class="nav-btn secondary dropdown-toggle w-100 d-flex align-items-center gap-3 p-3" type="button" data-bs-toggle="dropdown">
+                <i class="bi bi-list fs-5"></i>
+                <span class="fs-5">Menu</span>
+            </button>
+            <ul class="dropdown-menu bg-dark border border-light">
+                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-gear me-2 fs-5"></i>Settings</a></li>
+                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-heart me-2 fs-5"></i>Wishlist</a></li>
+                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-flag me-2 fs-5"></i>Reading Goals</a></li>
+                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-star me-2 fs-5"></i>Favorites</a></li>
+                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-question-circle me-2 fs-5"></i>Help & Support</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
         <!-- Main Content -->
-        <main class="flex-grow-1 content-area" style="margin-left: var(--sidebar-width);">
-            <div class="container-fluid py-4 px-3 px-lg-4">
-                <!-- Hero Section with Stats -->
-                <div class="row g-5 mb-5">
-                    <div class="col-lg-6">
-                        <div class="hero-image">
-                            <img src="Img/Chilling Goblin 3.0.png" alt="Chilling Goblin" class="img-fluid rounded-4">
-                        </div>
-                    </div>
+        <div class="hero-image" style="overflow: hidden; border-radius: 1rem;">
+    <img src="Img/Chilling Goblin 3.0.png" alt="Chilling Goblin" 
+         class="img-fluid" 
+         style="margin-top: -250px;margin-left: 300px; transform: translateY(-20px);">
+</div>
                     
                     <div class="col-lg-6">
                         <div class="card-glass p-4">
@@ -181,95 +177,95 @@
                     </div>
                     
                     <!-- Books Grid -->
-                    <div class="row g-4">
-                        <div class="col-md-6 col-lg-3">
-                            <div class="card card-glass h-100 border-0">
-                                <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1597695864i/54493401.jpg" 
-                                     class="card-img-top" alt="Project Hail Mary" style="height: 300px; object-fit: cover;">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title">Project Hail Mary</h5>
-                                    <p class="card-text text-muted small mb-2">Andy Weir</p>
-                                    <div class="text-warning mb-3">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                    </div>
-                                    <div class="mt-auto">
-                                        <span class="badge bg-purple">TBR</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6 col-lg-3">
-                            <div class="card card-glass h-100 border-0">
-                                <img src="https://m.media-amazon.com/images/I/81DMp7F91LL._SL1500_.jpg" 
-                                     class="card-img-top" alt="Dune" style="height: 300px; object-fit: cover;">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title">Dune</h5>
-                                    <p class="card-text text-muted small mb-2">Frank Herbert</p>
-                                    <div class="text-warning mb-3">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                    </div>
-                                    <div class="mt-auto">
-                                        <span class="badge bg-success">Completed</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6 col-lg-3">
-                            <div class="card card-glass h-100 border-0">
-                                <img src="https://m.media-amazon.com/images/I/71p5luifDjL._SL1500_.jpg" 
-                                     class="card-img-top" alt="The Will Of The Many" style="height: 300px; object-fit: cover;">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title">The Will Of The Many</h5>
-                                    <p class="card-text text-muted small mb-2">James Islington</p>
-                                    <div class="text-warning mb-3">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                    </div>
-                                    <div class="mt-auto">
-                                        <span class="badge bg-info">Reading</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6 col-lg-3">
-                            <div class="card card-glass h-100 border-0">
-                                <img src="https://m.media-amazon.com/images/I/815EJibD9DL._SY466_.jpg" 
-                                     class="card-img-top" alt="The Shadow of the Gods" style="height: 300px; object-fit: cover;">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title">Shadow of the Gods</h5>
-                                    <p class="card-text text-muted small mb-2">John Gwynne</p>
-                                    <div class="text-warning mb-3">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                    </div>
-                                    <div class="mt-auto">
-                                        <span class="badge bg-success">Completed</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                   <div class="row g-4">
+    <div class="col-md-6 col-lg-3">
+        <div class="card card-glass h-100 border-0 d-flex flex-row align-items-start p-3">
+            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1597695864i/54493401.jpg" 
+                 class="card-img-left" alt="Project Hail Mary" 
+                 style="width: 120px; height: 180px; object-fit: cover; margin-right: 15px;">
+            <div class="card-body d-flex flex-column p-0" style="flex: 1;">
+                <h5 class="card-title fs-6 mb-1">Project Hail Mary</h5>
+                <p class="card-text text-muted small mb-2">Andy Weir</p>
+                <div class="text-warning mb-2 small">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                </div>
+                <div class="mt-auto">
+                    <span class="badge bg-purple">TBR</span>
+                </div>
             </div>
-        </main>
+        </div>
     </div>
+    
+    <div class="col-md-6 col-lg-3">
+        <div class="card card-glass h-100 border-0 d-flex flex-row align-items-start p-3">
+            <img src="https://m.media-amazon.com/images/I/81DMp7F91LL._SL1500_.jpg" 
+                 class="card-img-left" alt="Dune" 
+                 style="width: 120px; height: 180px; object-fit: cover; margin-right: 15px;">
+            <div class="card-body d-flex flex-column p-0" style="flex: 1;">
+                <h5 class="card-title fs-6 mb-1">Dune</h5>
+                <p class="card-text text-muted small mb-2">Frank Herbert</p>
+                <div class="text-warning mb-2 small">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                </div>
+                <div class="mt-auto">
+                    <span class="badge bg-success">Completed</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-lg-3">
+        <div class="card card-glass h-100 border-0 d-flex flex-row align-items-start p-3">
+            <img src="https://m.media-amazon.com/images/I/71p5luifDjL._SL1500_.jpg" 
+                 class="card-img-left" alt="The Will Of The Many" 
+                 style="width: 120px; height: 180px; object-fit: cover; margin-right: 15px;">
+            <div class="card-body d-flex flex-column p-0" style="flex: 1;">
+                <h5 class="card-title fs-6 mb-1">The Will Of The Many</h5>
+                <p class="card-text text-muted small mb-2">James Islington</p>
+                <div class="text-warning mb-2 small">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                </div>
+                <div class="mt-auto">
+                    <span class="badge bg-info">Reading</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-lg-3">
+        <div class="card card-glass h-100 border-0 d-flex flex-row align-items-start p-3">
+            <img src="https://m.media-amazon.com/images/I/815EJibD9DL._SY466_.jpg" 
+                 class="card-img-left" alt="The Shadow of the Gods" 
+                 style="width: 120px; height: 180px; object-fit: cover; margin-right: 15px;">
+            <div class="card-body d-flex flex-column p-0" style="flex: 1;">
+                <h5 class="card-title fs-6 mb-1">Shadow of the Gods</h5>
+                <p class="card-text text-muted small mb-2">John Gwynne</p>
+                <div class="text-warning mb-2 small">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                </div>
+                <div class="mt-auto">
+                    <span class="badge bg-success">Completed</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Footer -->
     <footer class="py-4 bg-dark-glass border-top border-glass">

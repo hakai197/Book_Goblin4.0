@@ -42,43 +42,43 @@
         </div>
     </header>
 
-    <div class="d-flex">
-        <!-- Sidebar -->
-        <nav class="nav-sidebar d-none d-lg-block">
-            <div class="d-flex flex-column gap-3 px-3">
-                <a href="dashboard.html" class="nav-btn text-decoration-none d-flex align-items-center gap-3">
-                    <i class="bi bi-house"></i>
-                    <span>Home</span>
-                </a>
+   <nav class="nav-sidebar d-none d-lg-block">
+    <div class="d-flex flex-column gap-3 px-3 py-3">
+        <a href="dashboard.html" class="nav-btn text-decoration-none d-flex align-items-center gap-3 p-3">
+            <i class="bi bi-house fs-5"></i>
+            <span class="fs-5">Home</span>
+        </a>
 
-                <a href="books.html" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3">
-                    <i class="bi bi-book"></i>
-                    <span>My Books</span>
-                </a>
+        <a href="books.html" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3 p-3">
+            <i class="bi bi-book fs-5"></i>
+            <span class="fs-5">My Books</span>
+        </a>
 
-                <a href="discover.html" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3">
-                    <i class="bi bi-compass"></i>
-                    <span>Discover</span>
-                </a>
+        <a href="discover.html" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3 p-3">
+            <i class="bi bi-compass fs-5"></i>
+            <span class="fs-5">Discover</span>
+        </a>
 
-                <a href="https://www.hpb.com/" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3" target="_blank">
-                    <i class="bi bi-cart-plus"></i>
-                    <span>Buy Books</span>
-                </a>
+        <a href="https://www.hpb.com/" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3 p-3" target="_blank">
+            <i class="bi bi-cart-plus fs-5"></i>
+            <span class="fs-5">Buy Books</span>
+        </a>
 
-                <div class="dropdown">
-                    <button class="nav-btn secondary dropdown-toggle w-100 d-flex align-items-center gap-3" type="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-list"></i>
-                        <span>Menu</span>
-                    </button>
-                    <ul class="dropdown-menu bg-dark border border-light">
-                        <li><a class="dropdown-item text-light" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
-                        <li><a class="dropdown-item text-light" href="#"><i class="bi bi-heart me-2"></i>Wishlist</a></li>
-                        <li><a class="dropdown-item text-light" href="#"><i class="bi bi-flag me-2"></i>Reading Goals</a></li>
-                        <li><a class="dropdown-item text-light" href="#"><i class="bi bi-star me-2"></i>Favorites</a></li>
-                        <li><a class="dropdown-item text-light" href="#"><i class="bi bi-question-circle me-2"></i>Help & Support</a></li>
-                    </ul>
-                </div>
+        <div class="dropdown">
+            <button class="nav-btn secondary dropdown-toggle w-100 d-flex align-items-center gap-3 p-3" type="button" data-bs-toggle="dropdown">
+                <i class="bi bi-list fs-5"></i>
+                <span class="fs-5">Menu</span>
+            </button>
+            <ul class="dropdown-menu bg-dark border border-light">
+                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-gear me-2 fs-5"></i>Settings</a></li>
+                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-heart me-2 fs-5"></i>Wishlist</a></li>
+                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-flag me-2 fs-5"></i>Reading Goals</a></li>
+                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-star me-2 fs-5"></i>Favorites</a></li>
+                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-question-circle me-2 fs-5"></i>Help & Support</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
             </div>
         </nav>
 
@@ -99,34 +99,51 @@
                         </div>
                         
                         <!-- Carousel -->
-                        <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner rounded-4 overflow-hidden">
-                                <div class="carousel-item active">
-                                    <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1597695864i/54493401.jpg" 
-                                         class="d-block w-100" alt="Project Hail Mary" style="height: 400px; object-fit: cover;">
-                                    <div class="carousel-caption bg-dark bg-opacity-75 p-3">
-                                        <h5>Project Hail Mary</h5>
-                                        <p>Andy Weir</p>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://m.media-amazon.com/images/I/71GHKo78YBL._SL1500_.jpg" 
-                                         class="d-block w-100" alt="Gideon the Ninth" style="height: 400px; object-fit: cover;">
-                                    <div class="carousel-caption bg-dark bg-opacity-75 p-3">
-                                        <h5>Gideon The Ninth</h5>
-                                        <p>Tamsyn Muir</p>
-                                    </div>
-                                </div>
+                        <div id="discoverCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner rounded-4 overflow-hidden">
+                        <div class="carousel-item active">
+                            <div class="d-flex justify-content-start">
+                                <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1597695864i/54493401.jpg" 
+                                     class="d-block" alt="Project Hail Mary" 
+                                     style="height: 300px; width: 200px; object-fit: cover;">
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon"></span>
-                            </button>
+                            <div class="carousel-caption bg-dark bg-opacity-75 p-3" style="text-align: left; right: auto; left: 220px; bottom: 20px; width: auto;">
+                                <h5>Project Hail Mary</h5>
+                                <p>Andy Weir • Sci-Fi • 4.6★</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-flex justify-content-start">
+                                <img src="https://m.media-amazon.com/images/I/71GHKo78YBL._SL1500_.jpg" 
+                                     class="d-block" alt="Gideon The Ninth" 
+                                     style="height: 300px; width: 200px; object-fit: cover;">
+                            </div>
+                            <div class="carousel-caption bg-dark bg-opacity-75 p-3" style="text-align: left; right: auto; left: 220px; bottom: 20px; width: auto;">
+                                <h5>Gideon The Ninth</h5>
+                                <p>Tamsyn Muir • Fantasy • 4.2★</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-flex justify-content-start">
+                                <img src="https://m.media-amazon.com/images/I/91NXdVnMoGL._SL1500_.jpg" 
+                                     class="d-block" alt="The Priory of the Orange Tree" 
+                                     style="height: 300px; width: 200px; object-fit: cover;">
+                            </div>
+                            <div class="carousel-caption bg-dark bg-opacity-75 p-3" style="text-align: left; right: auto; left: 220px; bottom: 20px; width: auto;">
+                                <h5>Priory of the Orange Tree</h5>
+                                <p>Samantha Shannon • Fantasy • 4.3★</p>
+                            </div>
                         </div>
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#discoverCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#discoverCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
                 </div>
+            </div>
+        </div>
 
                 <!-- Stats -->
                 <section class="mb-5">
