@@ -64,6 +64,37 @@
         overflow: visible; /* Allow stats to overflow if needed */
     }
     
+    /* Table Styles */
+    .reading-table {
+        width: 100%;
+        color: #fff;
+        border-collapse: collapse;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .reading-table th {
+        text-align: left;
+        padding: 12px 8px;
+        color: #9b4dff;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        font-size: 0.9rem;
+    }
+    
+    .reading-table td {
+        padding: 10px 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
+    }
+    
+    .reading-table tr:last-child td {
+        border-bottom: none;
+    }
+    
+    .reading-table tr:hover {
+        background: rgba(155, 77, 255, 0.1);
+    }
+    
     /* Adjust for responsive design */
     @media (max-width: 1200px) {
         .hero-image-cropped {
@@ -126,6 +157,12 @@
         
         .stats-overlay {
             margin-top: -30px;
+        }
+        
+        .reading-table th,
+        .reading-table td {
+            padding: 8px 4px;
+            font-size: 0.8rem;
         }
     }
 </style>
@@ -224,21 +261,60 @@
                                 <img src="Img/Chilling Goblin 3.0.png" alt="Chillin Goblin" class="img-fluid">
                             </div>
                             
-                            <!-- Stats Window - Overlay centered on image -->
+                            <!-- Reading Progress Table - Overlay centered on image -->
                             <div class="stats-overlay">
-                                <div class="stats-window" style="background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(15px); border: 1px solid rgba(155, 77, 255, 0.4); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
-                                    <h3 style="color: #fff; margin-bottom: 1.5rem; font-family: 'Literata', serif; font-size: 1.5rem;">Reading Stats</h3>
-                                    <div class="stat-item">
-                                        <span class="stat-label" style="color: #ccc;">Pages Read</span>
-                                        <span class="stat-value" style="color: #9b4dff;">1,250</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label" style="color: #ccc;">Reading Streak</span>
-                                        <span class="stat-value" style="color: #9b4dff;">12 days</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label" style="color: #ccc;">Reading Goal</span>
-                                        <span class="stat-value" style="color: #9b4dff;">2,000 pages</span>
+                                <div class="stats-window" style="background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(155, 77, 255, 0.4); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); border-radius: 16px; padding: 1.5rem;">
+                                    <h3 style="color: #fff; margin-bottom: 1.5rem; font-family: 'Literata', serif; font-size: 1.5rem; text-align: center;">Reading Progress</h3>
+                                    <table class="reading-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Month</th>
+                                                <th style="text-align: right;">Books</th>
+                                                <th style="text-align: right;">Pages</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>March 2024</td>
+                                                <td style="text-align: right;">3</td>
+                                                <td style="text-align: right;">850</td>
+                                            </tr>
+                                            <tr>
+                                                <td>February 2024</td>
+                                                <td style="text-align: right;">4</td>
+                                                <td style="text-align: right;">1,200</td>
+                                            </tr>
+                                            <tr>
+                                                <td>January 2024</td>
+                                                <td style="text-align: right;">5</td>
+                                                <td style="text-align: right;">1,500</td>
+                                            </tr>
+                                            <tr>
+                                                <td>December 2023</td>
+                                                <td style="text-align: right;">6</td>
+                                                <td style="text-align: right;">1,800</td>
+                                            </tr>
+                                            <tr>
+                                                <td>November 2023</td>
+                                                <td style="text-align: right;">4</td>
+                                                <td style="text-align: right;">1,100</td>
+                                            </tr>
+                                            <tr>
+                                                <td>October 2023</td>
+                                                <td style="text-align: right;">3</td>
+                                                <td style="text-align: right;">950</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr style="border-top: 1px solid rgba(255, 255, 255, 0.2); font-weight: 600;">
+                                                <td>Total</td>
+                                                <td style="text-align: right;">25</td>
+                                                <td style="text-align: right; color: #9b4dff;">7,400</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <div style="text-align: center; margin-top: 1rem; color: #aaa; font-size: 0.8rem;">
+                                        <span>📈 12% increase from last quarter</span>
                                     </div>
                                 </div>
                             </div>
