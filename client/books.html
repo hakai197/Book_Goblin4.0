@@ -24,6 +24,30 @@
         .reading-table tr:hover {
             background: rgba(155, 77, 255, 0.1);
         }
+        
+        .progress-ring {
+            width: 150px;
+            height: 150px;
+        }
+        
+        .progress-ring-circle {
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        
+        #readingGoalModal {
+            backdrop-filter: blur(5px);
+        }
+        
+        .book-actions {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .card:hover .book-actions {
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -43,7 +67,7 @@
             
             <!-- User Menu -->
             <div class="dropdown">
-                <button class="btn btn-dark dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
+                <button class="btn btn-dark dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" id="userMenuButton">
                     <img src="Img/avatar.png" alt="User Avatar" class="rounded-circle border border-purple" width="42" height="42">
                     <span>Account</span>
                 </button>
@@ -52,7 +76,7 @@
                     <li><a class="dropdown-item text-light" href="#"><i class="bi bi-person me-2"></i>Your Profile</a></li>
                     <li><a class="dropdown-item text-light" href="#"><i class="bi bi-plus-circle me-2"></i>Add Account</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a></li>
+                    <li><a class="dropdown-item text-danger" href="#" id="signOutBtn"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a></li>
                 </ul>
             </div>
         </div>
@@ -60,56 +84,61 @@
 
     <div class="d-flex">
         <!-- Sidebar -->
-           <nav class="nav-sidebar d-none d-lg-block">
-    <div class="d-flex flex-column gap-3 px-3 py-3">
-        <a href="dashboard.html" class="nav-btn text-decoration-none d-flex align-items-center gap-3 p-3">
-            <i class="bi bi-house fs-5"></i>
-            <span class="fs-5">Home</span>
-        </a>
+        <nav class="nav-sidebar d-none d-lg-block">
+            <div class="d-flex flex-column gap-3 px-3 py-3">
+                <a href="dashboard.html" class="nav-btn text-decoration-none d-flex align-items-center gap-3 p-3">
+                    <i class="bi bi-house fs-5"></i>
+                    <span class="fs-5">Home</span>
+                </a>
 
-        <a href="books.html" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3 p-3">
-            <i class="bi bi-book fs-5"></i>
-            <span class="fs-5">My Books</span>
-        </a>
+                <a href="books.html" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3 p-3">
+                    <i class="bi bi-book fs-5"></i>
+                    <span class="fs-5">My Books</span>
+                </a>
 
-        <a href="discover.html" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3 p-3">
-            <i class="bi bi-compass fs-5"></i>
-            <span class="fs-5">Discover</span>
-        </a>
+                <a href="discover.html" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3 p-3">
+                    <i class="bi bi-compass fs-5"></i>
+                    <span class="fs-5">Discover</span>
+                </a>
 
-        <a href="https://www.hpb.com/" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3 p-3" target="_blank">
-            <i class="bi bi-cart-plus fs-5"></i>
-            <span class="fs-5">Buy Books</span>
-        </a>
+                <a href="https://www.hpb.com/" class="nav-btn secondary text-decoration-none d-flex align-items-center gap-3 p-3" target="_blank">
+                    <i class="bi bi-cart-plus fs-5"></i>
+                    <span class="fs-5">Buy Books</span>
+                </a>
 
-        <div class="dropdown">
-            <button class="nav-btn secondary dropdown-toggle w-100 d-flex align-items-center gap-3 p-3" type="button" data-bs-toggle="dropdown">
-                <i class="bi bi-list fs-5"></i>
-                <span class="fs-5">Menu</span>
-            </button>
-            <ul class="dropdown-menu bg-dark border border-light">
-                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-gear me-2 fs-5"></i>Settings</a></li>
-                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-heart me-2 fs-5"></i>Wishlist</a></li>
-                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-flag me-2 fs-5"></i>Reading Goals</a></li>
-                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-star me-2 fs-5"></i>Favorites</a></li>
-                <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-question-circle me-2 fs-5"></i>Help & Support</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+                <div class="dropdown">
+                    <button class="nav-btn secondary dropdown-toggle w-100 d-flex align-items-center gap-3 p-3" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-list fs-5"></i>
+                        <span class="fs-5">Menu</span>
+                    </button>
+                    <ul class="dropdown-menu bg-dark border border-light">
+                        <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-gear me-2 fs-5"></i>Settings</a></li>
+                        <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-heart me-2 fs-5"></i>Wishlist</a></li>
+                        <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-flag me-2 fs-5"></i>Reading Goals</a></li>
+                        <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-star me-2 fs-5"></i>Favorites</a></li>
+                        <li><a class="dropdown-item text-light p-3" href="#"><i class="bi bi-question-circle me-2 fs-5"></i>Help & Support</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
         <!-- Main Content -->
-        <div class="hero-image" style="overflow: hidden; border-radius: 1rem;">
-    <img src="Img/Chilling%20Goblin%203.0.png" alt="Chilling Goblin"
-         class="img-fluid"
-         style="margin-top: -250px;margin-left: 300px; transform: translateY(-20px);">
-</div>
-                    
+        <main class="flex-grow-1 content-area" style="margin-left: var(--sidebar-width);">
+            <div class="container-fluid py-4 px-3 px-lg-4">
+                <!-- Hero Section -->
+                <div class="hero-image mb-5" style="overflow: hidden; border-radius: 1rem;">
+                    <img src="Img/Chilling%20Goblin%203.0.png" alt="Chilling Goblin"
+                         class="img-fluid"
+                         style="margin-top: -250px; margin-left: 300px; transform: translateY(-20px);">
+                </div>
+
+                <!-- Reading Stats and Goals -->
+                <div class="row g-4 mb-5">
                     <div class="col-lg-6">
                         <div class="card-glass p-4">
                             <h3 class="text-gradient mb-4">Reading Progress</h3>
                             <div class="table-responsive">
-                                <table class="reading-table w-100">
+                                <table class="reading-table w-100" id="readingTable">
                                     <thead>
                                         <tr>
                                             <th class="text-start">Month</th>
@@ -117,7 +146,7 @@
                                             <th class="text-end">Pages</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="tableBody">
                                         <tr>
                                             <td>March 2024</td>
                                             <td class="text-end">3</td>
@@ -142,23 +171,85 @@
                                     <tfoot>
                                         <tr class="border-top">
                                             <td class="fw-bold">Total</td>
-                                            <td class="text-end fw-bold">18</td>
-                                            <td class="text-end fw-bold text-purple">5,350</td>
+                                            <td class="text-end fw-bold" id="totalBooks">18</td>
+                                            <td class="text-end fw-bold text-purple" id="totalPages">5,350</td>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
                             <div class="mt-3 text-center text-muted small">
-                                <i class="bi bi-graph-up me-1"></i> 12% increase from last quarter
+                                <i class="bi bi-graph-up me-1"></i> <span id="progressText">12% increase from last quarter</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="card-glass p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h3 class="text-gradient mb-0">Reading Goals</h3>
+                                <button class="btn btn-sm btn-outline-primary" id="setGoalBtn">
+                                    <i class="bi bi-plus"></i> Set Goal
+                                </button>
+                            </div>
+                            
+                            <div class="text-center mb-4">
+                                <svg class="progress-ring" id="goalRing">
+                                    <circle class="progress-ring-bg" cx="75" cy="75" r="65" stroke="rgba(255,255,255,0.1)" stroke-width="10" fill="transparent"/>
+                                    <circle class="progress-ring-circle" cx="75" cy="75" r="65" stroke="#9b4dff" stroke-width="10" fill="transparent" stroke-dasharray="408.4" stroke-dashoffset="408.4"/>
+                                </svg>
+                                <div class="mt-3">
+                                    <h4 id="goalPercentage">65%</h4>
+                                    <p class="text-muted" id="goalText">18 of 50 books read</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="goalRange" class="form-label">Adjust Goal: <span id="goalValue">50</span> books</label>
+                                <input type="range" class="form-range" id="goalRange" min="10" max="100" step="5" value="50">
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Search and Filter Section -->
+                <section class="mb-4">
+                    <div class="card-glass p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-dark border-glass">
+                                        <i class="bi bi-search"></i>
+                                    </span>
+                                    <input type="text" class="form-control bg-dark border-glass text-light" 
+                                           id="bookSearch" placeholder="Search books by title or author..."
+                                           pattern="[A-Za-z0-9\s]{2,50}" 
+                                           title="Search term must be 2-50 characters">
+                                    <button class="btn btn-primary" type="button" id="searchBtn">Search</button>
+                                </div>
+                                <div class="form-text text-muted" id="searchFeedback"></div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-dark border-glass">Sort by</span>
+                                    <select class="form-select bg-dark border-glass text-light" id="sortBooks">
+                                        <option value="title">Title A-Z</option>
+                                        <option value="title-desc">Title Z-A</option>
+                                        <option value="author">Author A-Z</option>
+                                        <option value="rating">Rating High-Low</option>
+                                        <option value="status">Status</option>
+                                        <option value="date">Recently Added</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Books Section -->
                 <section>
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="text-gradient mb-0">My Books</h2>
+                        <h2 class="text-gradient mb-0">My Books <span class="badge bg-purple" id="bookCount">4</span></h2>
                         
                         <!-- Filters -->
                         <div class="btn-group" role="group">
@@ -177,105 +268,107 @@
                     </div>
                     
                     <!-- Books Grid -->
-                   <div class="row g-4">
-    <div class="col-md-6 col-lg-3">
-        <div class="card card-glass h-100 border-0 d-flex flex-row align-items-start p-3">
-            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1597695864i/54493401.jpg" 
-                 class="card-img-left" alt="Project Hail Mary" 
-                 style="width: 120px; height: 180px; object-fit: cover; margin-right: 15px;">
-            <div class="card-body d-flex flex-column p-0" style="flex: 1;">
-                <h5 class="card-title fs-6 mb-1">Project Hail Mary</h5>
-                <p class="card-text text-muted small mb-2">Andy Weir</p>
-                <div class="text-warning mb-2 small">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
+                    <div class="row g-4" id="booksGrid">
+                        <!-- Books will be dynamically loaded here -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Book Modal -->
+    <div class="modal fade" id="addBookModal" tabindex="-1" aria-labelledby="addBookModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark border border-light">
+                <div class="modal-header">
+                    <h5 class="modal-title text-gradient" id="addBookModalLabel">Add New Book</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="mt-auto">
-                    <span class="badge bg-purple">TBR</span>
+                <div class="modal-body">
+                    <form id="newBookForm" novalidate>
+                        <div class="mb-3">
+                            <label for="modalBookTitle" class="form-label">Book Title *</label>
+                            <input type="text" class="form-control" id="modalBookTitle" 
+                                   required minlength="2" maxlength="100">
+                            <div class="invalid-feedback">Please enter a book title (2-100 characters).</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="modalBookAuthor" class="form-label">Author *</label>
+                            <input type="text" class="form-control" id="modalBookAuthor" 
+                                   required minlength="2" maxlength="50">
+                            <div class="invalid-feedback">Please enter an author name (2-50 characters).</div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="modalBookGenre" class="form-label">Genre</label>
+                                <select class="form-select" id="modalBookGenre">
+                                    <option value="">Select genre</option>
+                                    <option value="Fantasy">Fantasy</option>
+                                    <option value="Sci-Fi">Science Fiction</option>
+                                    <option value="Mystery">Mystery</option>
+                                    <option value="Romance">Romance</option>
+                                    <option value="Horror">Horror</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="modalBookStatus" class="form-label">Status *</label>
+                                <select class="form-select" id="modalBookStatus" required>
+                                    <option value="">Select status</option>
+                                    <option value="Reading">Currently Reading</option>
+                                    <option value="TBR">To Be Read</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a status.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="modalBookRating" class="form-label">Rating (0-5)</label>
+                            <div class="d-flex align-items-center">
+                                <input type="range" class="form-range me-3" id="modalBookRating" min="0" max="5" step="0.5" value="0">
+                                <span id="modalRatingValue" class="badge bg-primary">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="modalBookNotes" class="form-label">Notes</label>
+                            <textarea class="form-control" id="modalBookNotes" rows="3" maxlength="200"></textarea>
+                            <div class="form-text text-end"><span id="modalCharCount">0</span>/200</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveBookBtn">Add Book</button>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="col-md-6 col-lg-3">
-        <div class="card card-glass h-100 border-0 d-flex flex-row align-items-start p-3">
-            <img src="https://m.media-amazon.com/images/I/81DMp7F91LL._SL1500_.jpg" 
-                 class="card-img-left" alt="Dune" 
-                 style="width: 120px; height: 180px; object-fit: cover; margin-right: 15px;">
-            <div class="card-body d-flex flex-column p-0" style="flex: 1;">
-                <h5 class="card-title fs-6 mb-1">Dune</h5>
-                <p class="card-text text-muted small mb-2">Frank Herbert</p>
-                <div class="text-warning mb-2 small">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <div class="mt-auto">
-                    <span class="badge bg-success">Completed</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-6 col-lg-3">
-        <div class="card card-glass h-100 border-0 d-flex flex-row align-items-start p-3">
-            <img src="https://m.media-amazon.com/images/I/71p5luifDjL._SL1500_.jpg" 
-                 class="card-img-left" alt="The Will Of The Many" 
-                 style="width: 120px; height: 180px; object-fit: cover; margin-right: 15px;">
-            <div class="card-body d-flex flex-column p-0" style="flex: 1;">
-                <h5 class="card-title fs-6 mb-1">The Will Of The Many</h5>
-                <p class="card-text text-muted small mb-2">James Islington</p>
-                <div class="text-warning mb-2 small">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                </div>
-                <div class="mt-auto">
-                    <span class="badge bg-info">Reading</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-6 col-lg-3">
-        <div class="card card-glass h-100 border-0 d-flex flex-row align-items-start p-3">
-            <img src="https://m.media-amazon.com/images/I/815EJibD9DL._SY466_.jpg" 
-                 class="card-img-left" alt="The Shadow of the Gods" 
-                 style="width: 120px; height: 180px; object-fit: cover; margin-right: 15px;">
-            <div class="card-body d-flex flex-column p-0" style="flex: 1;">
-                <h5 class="card-title fs-6 mb-1">Shadow of the Gods</h5>
-                <p class="card-text text-muted small mb-2">John Gwynne</p>
-                <div class="text-warning mb-2 small">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                </div>
-                <div class="mt-auto">
-                    <span class="badge bg-success">Completed</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+    <!-- Floating Action Button -->
+    <button class="btn btn-primary rounded-circle position-fixed" 
+            style="bottom: 2rem; right: 2rem; width: 60px; height: 60px;"
+            id="addBookFab"
+            data-bs-toggle="modal" 
+            data-bs-target="#addBookModal">
+        <i class="bi bi-plus fs-4"></i>
+    </button>
 
     <!-- Footer -->
     <footer class="py-4 bg-dark-glass border-top border-glass">
         <div class="text-center">
             <p class="text">&copy; U197 Designs 2025 | Book Goblin - Your Personal Library Assistant</p>
+            <p class="text-muted small" id="pageStats"></p>
         </div>
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="books.js"></script>
     
     <!-- Page Transition Script -->
     <script>

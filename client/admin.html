@@ -944,109 +944,549 @@
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom Admin JavaScript -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const transition = document.getElementById('pageTransition');
-        
-        setTimeout(() => {
-            transition.classList.remove('active');
-        }, 100);
-        
-        // Set text to black only for main content, not dropdowns
-        const elementsToColorBlack = [
-            'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-            '.admin-section', '.stat-card', '.flag-title',
-            '.user-name', '.flag-meta', '.user-meta',
-            '.section-title', '.activity-item',
-            '.quick-action-btn:not(:hover)', '.view-all-btn',
-            '.admin-nav-btn:not(.active)', '.badge.bg-light',
-            '.stat-label', '.stat-change', 'footer'
-        ];
-        
-        elementsToColorBlack.forEach(selector => {
-            document.querySelectorAll(selector).forEach(el => {
-                el.style.color = '#000000';
-            });
-        });
-        
-        // Quick action buttons
-        document.querySelectorAll('.btn-approve').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const item = this.closest('.flag-item');
-                item.style.opacity = '0.5';
-                setTimeout(() => {
-                    item.remove();
-                    updatePendingCount();
-                }, 300);
-            });
-        });
-        
-        document.querySelectorAll('.btn-deny').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (confirm('Are you sure you want to remove this item?')) {
-                    const item = this.closest('.flag-item');
-                    item.style.opacity = '0.5';
-                    setTimeout(() => {
-                        item.remove();
-                        updatePendingCount();
-                    }, 300);
-                }
-            });
-        });
-        
-        function updatePendingCount() {
-            const pendingItems = document.querySelectorAll('.flag-item').length;
-            const countElement = document.querySelector('.stat-card:nth-child(2) .stat-value');
-            if (countElement) {
-                countElement.textContent = pendingItems;
-            }
+// DOM Manipulation for Admin Dashboard Interactivity
+
+// 1. Cache elements using different selectors
+const pageTransition = document.getElementById('pageTransition'); // getElementById
+const adminSections = document.querySelectorAll('.admin-section'); // querySelectorAll
+const statCards = document.querySelectorAll('.stat-card'); // querySelectorAll
+const flagItems = document.querySelectorAll('.flag-item'); // querySelectorAll
+const activityLog = document.querySelector('.activity-log'); // querySelector
+const userMenuBtn = document.querySelector('.user-menu-btn'); // querySelector
+const quickActionBtns = document.querySelectorAll('.quick-action-btn'); // querySelectorAll
+const pendingFlagsStat = document.querySelector('.stat-card:nth-child(2) .stat-value'); // querySelector
+
+// 2. Create element using createElement for notifications
+function createNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type} alert-dismissible position-fixed`;
+    notification.style.cssText = `
+        top: 100px;
+        right: 20px;
+        z-index: 99999;
+        min-width: 300px;
+        animation: slideInRight 0.3s ease-out;
+    `;
+    
+    notification.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" onclick="this.parentElement.remove()"></button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.remove();
         }
-        
-        // Top navigation active state
-        document.querySelectorAll('.admin-nav-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                if (!this.classList.contains('dropdown-toggle')) {
-                    document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Ensure active button has white text
-                    this.style.color = 'white';
-                }
-            });
-        });
-        
-        // Reset active button text color on page load
-        document.querySelectorAll('.admin-nav-btn.active').forEach(btn => {
-            btn.style.color = 'white';
-        });
-        
-        // Navigation
-        document.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (this.classList.contains('dropdown-toggle')) return;
-                
-                if (this.href && 
-                    !this.href.includes('#') && 
-                    !this.hasAttribute('target') &&
-                    this.hostname === window.location.hostname &&
-                    !this.href.startsWith('mailto:') &&
-                    !this.href.startsWith('tel:') &&
-                    !this.href.startsWith('javascript:')) {
-                    
-                    e.preventDefault();
-                    const destination = this.href;
-                    
-                    transition.classList.add('active');
-                    document.body.classList.add('transitioning');
-                    
-                    setTimeout(() => {
-                        window.location.href = destination;
-                    }, 1500);
-                }
-            });
+    }, 5000);
+}
+
+// 3. Append new activity items dynamically
+function addActivityLogEntry(action, user = '@admin_you') {
+    const activityItem = document.createElement('div');
+    activityItem.className = 'activity-item';
+    
+    const now = new Date();
+    const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const timeAgo = 'Just now';
+    
+    activityItem.innerHTML = `
+        <strong>${user}</strong> ${action}
+        <div class="activity-time">${timeString} • ${timeAgo}</div>
+    `;
+    
+    // Prepend to the activity log
+    activityLog.insertBefore(activityItem, activityLog.firstChild);
+    
+    // Limit to 10 items
+    const items = activityLog.querySelectorAll('.activity-item');
+    if (items.length > 10) {
+        activityLog.removeChild(items[items.length - 1]);
+    }
+}
+
+// 4. Create and use DocumentFragment for bulk updates
+function updateFlagItems(newFlags) {
+    const flagsContainer = document.querySelector('.flags-list');
+    const fragment = document.createDocumentFragment();
+    
+    newFlags.forEach(flag => {
+        const flagItem = document.createElement('div');
+        flagItem.className = 'flag-item';
+        flagItem.innerHTML = `
+            <div class="flag-icon">${flag.icon}</div>
+            <div class="flag-info">
+                <div class="flag-title">${flag.title}</div>
+                <div class="flag-meta">${flag.meta}</div>
+            </div>
+            <div class="action-btns">
+                <button class="btn btn-sm btn-approve">Approve</button>
+                <button class="btn btn-sm btn-deny">Remove</button>
+                <button class="btn btn-sm btn-outline-secondary">View</button>
+            </div>
+        `;
+        fragment.appendChild(flagItem);
+    });
+    
+    flagsContainer.appendChild(fragment);
+    updatePendingFlagsCount();
+}
+
+// 5. Event listeners for interactive elements
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize page transition
+    setTimeout(() => {
+        pageTransition.classList.remove('active');
+    }, 100);
+    
+    // 6. Iterate over collection of elements to add hover effects
+    statCards.forEach((card, index) => {
+        // Add click counter functionality
+        let clickCount = 0;
+        card.addEventListener('click', function() {
+            clickCount++;
+            const originalValue = this.querySelector('.stat-value').textContent;
+            
+            // Create tooltip
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            tooltip.textContent = `Clicked ${clickCount} times`;
+            tooltip.style.cssText = `
+                position: absolute;
+                background: #000;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 4px;
+                font-size: 12px;
+                z-index: 1000;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                white-space: nowrap;
+            `;
+            
+            this.appendChild(tooltip);
+            setTimeout(() => tooltip.remove(), 1000);
         });
     });
-</script>
+    
+    // 7. Flag item actions with DOM manipulation
+    document.addEventListener('click', function(e) {
+        // Handle approve button clicks
+        if (e.target.classList.contains('btn-approve')) {
+            const flagItem = e.target.closest('.flag-item');
+            const flagTitle = flagItem.querySelector('.flag-title').textContent;
+            
+            // Animate removal
+            flagItem.style.opacity = '0.5';
+            flagItem.style.transform = 'translateX(-20px)';
+            
+            setTimeout(() => {
+                flagItem.remove();
+                addActivityLogEntry(`approved flag: "${flagTitle}"`);
+                createNotification(`Flag approved successfully`, 'success');
+                updatePendingFlagsCount();
+            }, 300);
+        }
+        
+        // Handle deny button clicks
+        if (e.target.classList.contains('btn-deny')) {
+            const flagItem = e.target.closest('.flag-item');
+            const flagTitle = flagItem.querySelector('.flag-title').textContent;
+            
+            // Ask for confirmation
+            if (confirm(`Are you sure you want to remove this flag: "${flagTitle}"?`)) {
+                flagItem.style.opacity = '0.5';
+                flagItem.style.transform = 'translateX(20px)';
+                
+                setTimeout(() => {
+                    flagItem.remove();
+                    addActivityLogEntry(`denied flag: "${flagTitle}"`);
+                    createNotification(`Flag removed`, 'warning');
+                    updatePendingFlagsCount();
+                }, 300);
+            }
+        }
+    });
+    
+    // 8. Quick action buttons functionality
+    quickActionBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            if (this.getAttribute('href') === '#' && !this.hasAttribute('data-bs-toggle')) {
+                e.preventDefault();
+                const actionText = this.querySelector('span:not(.quick-action-icon)').textContent;
+                
+                // Create progress indicator
+                const progress = document.createElement('div');
+                progress.className = 'progress-indicator';
+                progress.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 0%;
+                    height: 100%;
+                    background: rgba(67, 97, 238, 0.2);
+                    transition: width 2s ease;
+                    border-radius: 8px;
+                `;
+                
+                this.style.position = 'relative';
+                this.appendChild(progress);
+                
+                // Animate progress
+                setTimeout(() => {
+                    progress.style.width = '100%';
+                }, 10);
+                
+                // Simulate action completion
+                setTimeout(() => {
+                    progress.remove();
+                    this.style.background = '#10b981';
+                    this.style.color = 'white';
+                    this.style.borderColor = '#10b981';
+                    
+                    addActivityLogEntry(`performed: ${actionText}`);
+                    createNotification(`${actionText} completed successfully`, 'success');
+                    
+                    // Reset button after delay
+                    setTimeout(() => {
+                        this.style.background = '';
+                        this.style.color = '';
+                        this.style.borderColor = '';
+                    }, 2000);
+                }, 2000);
+            }
+        });
+    });
+    
+    // 9. User menu customization
+    userMenuBtn.addEventListener('click', function() {
+        // Update session time dynamically
+        const sessionInfo = document.querySelector('.session-info');
+        if (sessionInfo) {
+            const sessionTime = sessionInfo.querySelector('small:first-child');
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            sessionTime.textContent = `Session: ${hours}:${minutes}`;
+        }
+    });
+    
+    // 10. Real-time stats update simulation
+    function simulateRealTimeUpdates() {
+        setInterval(() => {
+            // Randomly update user count
+            const userCountElement = document.querySelector('.stat-card:nth-child(1) .stat-value');
+            if (userCountElement) {
+                const currentCount = parseInt(userCountElement.textContent.replace(/,/g, ''));
+                const randomIncrement = Math.floor(Math.random() * 3);
+                const newCount = currentCount + randomIncrement;
+                userCountElement.textContent = newCount.toLocaleString();
+                
+                // Update the change indicator
+                const changeElement = userCountElement.nextElementSibling.nextElementSibling;
+                if (changeElement && randomIncrement > 0) {
+                    changeElement.textContent = `↑ +${randomIncrement} just now`;
+                    changeElement.className = 'stat-change positive';
+                }
+            }
+        }, 10000); // Update every 10 seconds
+    }
+    
+    // 11. Add search functionality to activity log
+    const activitySearch = document.createElement('input');
+    activitySearch.type = 'text';
+    activitySearch.placeholder = 'Search activities...';
+    activitySearch.className = 'form-control mb-3';
+    activitySearch.style.maxWidth = '300px';
+    
+    const activitySection = document.querySelector('.admin-section .section-header');
+    if (activitySection) {
+        activitySection.insertAdjacentElement('beforeend', activitySearch);
+        
+        activitySearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const activityItems = document.querySelectorAll('.activity-item');
+            
+            activityItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    item.style.backgroundColor = searchTerm ? '#e7f3ff' : '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    }
+    
+    // 12. Add filter buttons to flags section
+    const filterButtons = document.createElement('div');
+    filterButtons.className = 'btn-group btn-group-sm mb-3';
+    filterButtons.innerHTML = `
+        <button class="btn btn-outline-primary active" data-filter="all">All</button>
+        <button class="btn btn-outline-primary" data-filter="review">Reviews</button>
+        <button class="btn btn-outline-primary" data-filter="user">Users</button>
+        <button class="btn btn-outline-primary" data-filter="book">Books</button>
+    `;
+    
+    const flagsSection = document.querySelector('.flags-list').parentElement;
+    const sectionHeader = flagsSection.querySelector('.section-header');
+    if (sectionHeader) {
+        sectionHeader.insertAdjacentElement('afterend', filterButtons);
+        
+        // Filter functionality
+        filterButtons.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON') {
+                // Update active button
+                filterButtons.querySelectorAll('button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                e.target.classList.add('active');
+                
+                // Filter flags
+                const filter = e.target.getAttribute('data-filter');
+                const flagItems = document.querySelectorAll('.flag-item');
+                
+                flagItems.forEach(item => {
+                    const flagIcon = item.querySelector('.flag-icon').textContent;
+                    let shouldShow = true;
+                    
+                    if (filter === 'review' && flagIcon !== '🗣️') shouldShow = false;
+                    if (filter === 'user' && flagIcon !== '🚫') shouldShow = false;
+                    if (filter === 'book' && flagIcon !== '📚') shouldShow = false;
+                    
+                    item.style.display = shouldShow ? 'flex' : 'none';
+                });
+            }
+        });
+    }
+    
+    // 13. Add sort functionality to user registrations
+    const userItems = document.querySelectorAll('.user-item');
+    if (userItems.length > 0) {
+        const sortButton = document.createElement('button');
+        sortButton.className = 'btn btn-sm btn-outline-secondary ms-2';
+        sortButton.innerHTML = 'Sort by Name <i class="bi bi-sort-alpha-down"></i>';
+        
+        const usersSection = document.querySelector('.admin-section:last-child .section-header');
+        if (usersSection) {
+            const viewAllBtn = usersSection.querySelector('.view-all-btn');
+            viewAllBtn.insertAdjacentElement('beforebegin', sortButton);
+            
+            let ascending = true;
+            sortButton.addEventListener('click', function() {
+                const usersContainer = document.querySelector('.row:last-child');
+                const users = Array.from(usersContainer.querySelectorAll('.user-item'));
+                
+                users.sort((a, b) => {
+                    const nameA = a.querySelector('.user-name').textContent;
+                    const nameB = b.querySelector('.user-name').textContent;
+                    return ascending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+                });
+                
+                // Reorder in DOM
+                users.forEach(user => {
+                    usersContainer.appendChild(user.parentElement);
+                });
+                
+                // Toggle sort direction
+                ascending = !ascending;
+                this.innerHTML = ascending 
+                    ? 'Sort by Name <i class="bi bi-sort-alpha-down"></i>' 
+                    : 'Sort by Name <i class="bi bi-sort-alpha-up"></i>';
+            });
+        }
+    }
+    
+    // 14. Add refresh button to stats
+    const refreshButton = document.createElement('button');
+    refreshButton.className = 'btn btn-sm btn-outline-primary';
+    refreshButton.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Refresh Stats';
+    refreshButton.style.marginLeft = '10px';
+    
+    const dashboardHeader = document.querySelector('.d-flex.justify-content-between.align-items-center.mb-4');
+    if (dashboardHeader) {
+        dashboardHeader.querySelector('div').appendChild(refreshButton);
+        
+        refreshButton.addEventListener('click', function() {
+            this.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Refreshing...';
+            this.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Update all stats with random data
+                document.querySelectorAll('.stat-value').forEach((stat, index) => {
+                    const current = parseInt(stat.textContent.replace(/,/g, ''));
+                    const change = Math.floor(Math.random() * 50) - 10;
+                    const newValue = Math.max(0, current + change);
+                    
+                    // Animate the number change
+                    animateValueChange(stat, current, newValue);
+                    
+                    // Update change indicator
+                    const changeElement = stat.nextElementSibling.nextElementSibling;
+                    if (changeElement) {
+                        const isPositive = change > 0;
+                        changeElement.textContent = `${isPositive ? '↑' : '↓'} ${Math.abs(change)} just now`;
+                        changeElement.className = `stat-change ${isPositive ? 'positive' : 'negative'}`;
+                    }
+                });
+                
+                this.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Refresh Stats';
+                this.disabled = false;
+                
+                addActivityLogEntry('refreshed dashboard statistics');
+                createNotification('Statistics updated successfully', 'info');
+            }, 1500);
+        });
+    }
+    
+    // 15. Initialize real-time updates
+    simulateRealTimeUpdates();
+    
+    // 16. Update pending flags count
+    updatePendingFlagsCount();
+});
 
-</body>
-</html>
+// Helper functions
+function updatePendingFlagsCount() {
+    const pendingItems = document.querySelectorAll('.flag-item').length;
+    if (pendingFlagsStat) {
+        animateValueChange(pendingFlagsStat, parseInt(pendingFlagsStat.textContent), pendingItems);
+    }
+}
+
+function animateValueChange(element, start, end) {
+    const duration = 500;
+    const stepTime = 20;
+    const steps = duration / stepTime;
+    const increment = (end - start) / steps;
+    let current = start;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+            current = end;
+            clearInterval(timer);
+        }
+        element.textContent = Math.round(current).toLocaleString();
+    }, stepTime);
+}
+
+// 17. Navigation with page transition
+document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        if (this.classList.contains('dropdown-toggle') || 
+            this.hasAttribute('data-bs-toggle')) return;
+        
+        if (this.href && 
+            !this.href.includes('#') && 
+            !this.hasAttribute('target') &&
+            this.hostname === window.location.hostname &&
+            !this.href.startsWith('mailto:') &&
+            !this.href.startsWith('tel:') &&
+            !this.href.startsWith('javascript:')) {
+            
+            e.preventDefault();
+            const destination = this.href;
+            
+            pageTransition.classList.add('active');
+            document.body.classList.add('transitioning');
+            
+            setTimeout(() => {
+                window.location.href = destination;
+            }, 800);
+        }
+    });
+});
+
+// 18. Add CSS animations dynamically
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+    
+    .stat-card.clicked {
+        animation: pulse 0.3s ease;
+    }
+    
+    .flag-item.removing {
+        animation: fadeOut 0.3s ease forwards;
+    }
+    
+    /* Active button styles */
+    .admin-nav-btn.active {
+        background-color: #4361ee !important;
+        color: white !important;
+    }
+`;
+document.head.appendChild(style);
+
+// 19. Broadcast modal functionality
+const broadcastModal = document.getElementById('broadcastModal');
+if (broadcastModal) {
+    broadcastModal.addEventListener('shown.bs.modal', function() {
+        const sendBtn = this.querySelector('.btn-primary');
+        const originalText = sendBtn.textContent;
+        
+        sendBtn.addEventListener('click', function() {
+            const title = broadcastModal.querySelector('input[type="text"]').value;
+            const message = broadcastModal.querySelector('textarea').value;
+            const audience = broadcastModal.querySelector('select').value;
+            
+            if (!title || !message) {
+                createNotification('Please fill in all fields', 'warning');
+                return;
+            }
+            
+            // Show sending state
+            this.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Sending...';
+            this.disabled = true;
+            
+            // Simulate sending
+            setTimeout(() => {
+                const modalInstance = bootstrap.Modal.getInstance(broadcastModal);
+                modalInstance.hide();
+                
+                this.innerHTML = originalText;
+                this.disabled = false;
+                
+                // Clear form
+                broadcastModal.querySelector('input[type="text"]').value = '';
+                broadcastModal.querySelector('textarea').value = '';
+                
+                addActivityLogEntry(`sent announcement: "${title}" to ${audience}`);
+                createNotification('Announcement sent successfully!', 'success');
+            }, 2000);
+        });
+    });
+}
+
+console.log('Admin Dashboard initialized with enhanced interactivity');
+</script>
