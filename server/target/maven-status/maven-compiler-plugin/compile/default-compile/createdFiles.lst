@@ -1,0 +1,9 @@
+com\bookgoblin\config\DataSeeder.class
+com\bookgoblin\model\Book.class
+com\bookgoblin\repository\BookRepository.class
+com\bookgoblin\config\WebConfig.class
+com\bookgoblin\BookGoblinApplication.class
+com\bookgoblin\service\BookService.class
+com\bookgoblin\model\OpenLibraryDoc.class
+com\bookgoblin\controller\BookController.class
+com\bookgoblin\model\OpenLibraryResponse.class

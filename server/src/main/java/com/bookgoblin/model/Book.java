@@ -1,23 +1,53 @@
 package com.bookgoblin.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
-import java.util.List;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "books")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
-    private String id;
-    private String title;
-    private List<String> authors;
-    private Integer firstPublishedYear;
-    private String coverId;
-    private String isbn;
-    private String status = "TBR"; // TBR, Reading, Completed
-    private Integer rating = 0;
 
-    public String getCoverUrl() {
-        if (coverId != null && !coverId.isEmpty()) {
-            return String.format("https://covers.openlibrary.org/b/id/%s-M.jpg", coverId);
-        }
-        return "/img/default-cover.jpg";
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String title;
+
+    @Column(nullable = false)
+    private String author;
+
+    private String genre;
+
+    @Column(nullable = false)
+    private String status = "TBR"; // TBR, Reading, Completed, DNF
+
+    private Double rating = 0.0;
+
+    private Integer progress = 0;
+
+    @Column(length = 500)
+    private String notes;
+
+    private String coverUrl;
+
+    private String isbn;
+
+    private Integer publishedYear;
+
+    private Integer pages;
+
+    private String publisher;
+
+    @Column(length = 1000)
+    private String description;
+
+    private LocalDate dateAdded = LocalDate.now();
 }
