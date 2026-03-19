@@ -1,4 +1,3 @@
-C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\BookGoblinApplication.java
 C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\app\Application.java
 C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\app\controller\AuthController.java
 C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\app\controller\BookController.java
@@ -17,11 +16,3 @@ C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\b
 C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\app\service\AuthService.java
 C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\app\service\BookService.java
 C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\app\service\impl\UserDetailsServiceImpl.java
-C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\config\DataSeeder.java
-C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\config\WebConfig.java
-C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\controller\BookController.java
-C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\model\Book.java
-C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\model\OpenLibraryDoc.java
-C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\model\OpenLibraryResponse.java
-C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\repository\BookRepository.java
-C:\Users\nicholas.mathias\IdeaProjects\Book_Goblin4.0\server\src\main\java\com\bookgoblin\service\BookService.java
